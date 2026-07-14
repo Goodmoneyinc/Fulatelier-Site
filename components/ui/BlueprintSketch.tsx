@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const AMBIENT_START_MS = 2600;
+const AMBIENT_START_MS = 1800;
 const CIRCLE_PULSE_STAGGER_S = 0.4;
+const GRID_STAGGER_S = 0.08;
 
 type BlueprintSketchProps = {
   className?: string;
@@ -46,7 +47,7 @@ export function BlueprintSketch({ className = "" }: BlueprintSketchProps) {
           animate: { pathLength: 1 },
           transition: {
             duration: ms(duration),
-            delay: ms(delay) + staggerIndex * 0.1,
+            delay: ms(delay) + staggerIndex * GRID_STAGGER_S,
             ease: EASE,
           },
         };
@@ -92,13 +93,13 @@ export function BlueprintSketch({ className = "" }: BlueprintSketchProps) {
     transformOrigin: "center",
   };
 
-  const outerFrame = { delay: 500, duration: 700 };
-  const chromeBar = { delay: 900, duration: 500 };
-  const gridColumns = { delay: 1100, duration: 800 };
-  const crosshair = { delay: 1400, duration: 900 };
-  const dimensionLine = { delay: 1900, duration: 500 };
-  const registrationMarks = { delay: 2200, duration: 400 };
-  const registrationDots = { delay: 2500, duration: 400 };
+  const outerFrame = { delay: 200, duration: 500 };
+  const chromeBar = { delay: 500, duration: 400 };
+  const gridColumns = { delay: 650, duration: 600 };
+  const crosshair = { delay: 900, duration: 650 };
+  const dimensionLine = { delay: 1300, duration: 400 };
+  const registrationMarks = { delay: 1500, duration: 300 };
+  const registrationDots = { delay: 1550, duration: 250 };
 
   return (
     <motion.div

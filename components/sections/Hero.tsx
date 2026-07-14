@@ -8,8 +8,11 @@ import { Button } from "@/components/ui/Button";
 import { LogoMark } from "@/components/ui/LogoMark";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+/** Back-out / overshoot — logo "clicks into place" as the blueprint resolves */
+const RESOLVE_EASE = [0.34, 1.56, 0.64, 1] as const;
 
 const HEADLINE_LINES = ["Precision Built.", "Purpose Driven."] as const;
+const HEADLINE_DELAY = 2.2;
 
 function RevealedWord({
   word,
@@ -50,7 +53,7 @@ function Headline() {
         return (
           <span key={line} className="block">
             {words.map((word, i) => {
-              const delay = 0.4 + wordIndex * 0.06;
+              const delay = HEADLINE_DELAY + wordIndex * 0.06;
               wordIndex += 1;
               return (
                 <span key={`${line}-${word}-${i}`}>
@@ -72,7 +75,7 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Blueprint grid + elevation sketch + typography; no image, no scroll cue.
+ * Blueprint drafts, then the logo resolves out of the drawing into the stack.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -102,15 +105,28 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
-        <motion.div className="mb-6" {...fadeUp(0.2)}>
-          <LogoMark className="h-14 w-14" />
+        <motion.div
+          className="mb-6 origin-center"
+          initial={
+            reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.7 }
+          }
+          animate={
+            reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }
+          }
+          transition={{
+            duration: 0.6,
+            delay: 1.75,
+            ease: reduceMotion ? EASE : RESOLVE_EASE,
+          }}
+        >
+          <LogoMark className="h-28 w-28 md:h-40 md:w-40" />
         </motion.div>
 
         <Headline />
 
         <motion.p
           className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle"
-          {...fadeUp(0.7)}
+          {...fadeUp(2.5)}
         >
           Custom websites and web applications built to perform — not just to
           exist.
@@ -118,7 +134,7 @@ export function Hero() {
 
         <motion.div
           className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
-          {...fadeUp(0.9)}
+          {...fadeUp(2.7)}
         >
           <Button href="#contact" variant="solid">
             Start Your Project
