@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowLink } from "@/components/ui/ArrowLink";
 import { BlueprintGrid } from "@/components/ui/BlueprintGrid";
+import { BlueprintSketch } from "@/components/ui/BlueprintSketch";
 import { Button } from "@/components/ui/Button";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -70,7 +71,7 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Blueprint grid + typography carry the visual; no image, no scroll cue.
+ * Blueprint grid + elevation sketch + typography; no image, no scroll cue.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -88,7 +89,16 @@ export function Hero() {
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
-      <BlueprintGrid animateIn />
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        <BlueprintGrid animateIn />
+      </div>
+
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
+        aria-hidden="true"
+      >
+        <BlueprintSketch className="mx-auto h-auto w-full max-w-[1000px] text-accent opacity-[0.08]" />
+      </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
         <motion.p
