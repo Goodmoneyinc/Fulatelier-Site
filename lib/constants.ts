@@ -63,4 +63,12 @@ export const radii = {
   none: "0px",
 } as const;
 
+/**
+ * External social / community destinations.
+ * TODO: Replace buildLog with the live Fulatelier Facebook Build Log URL.
+ */
+export const social = {
+  buildLog: "https://www.facebook.com/fulatelier", // TODO: replace with real Build Log URL
+} as const;
+
 export type ColorToken = keyof typeof colors;
