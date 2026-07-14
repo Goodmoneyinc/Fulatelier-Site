@@ -1,90 +1,78 @@
 import type { Config } from "tailwindcss";
+import { colors, radii, spacing, typography } from "./lib/constants";
 
 /**
- * Fulatelier Tailwind theme — maps design-system tokens.
- * Requires `styles/globals.css` CSS variables.
+ * Fulatelier Tailwind theme.
+ * Colors and spacing are imported from lib/constants.ts —
+ * no hardcoded hex or px values here.
  */
 const config: Config = {
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./lib/**/*.{ts,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--color-background)",
-        accent: {
-          DEFAULT: "var(--color-accent)",
-          light: "var(--color-accent-light)",
-        },
-        cream: "var(--color-text)",
-        subtle: "var(--color-subtle)",
-        card: "var(--color-card)",
+        background: colors.background,
+        accent: colors.accent,
+        "gold-light": colors.goldLight,
+        text: colors.text,
+        subtle: colors.subtle,
+        card: colors.cardBg,
+        footer: colors.footerBg,
       },
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
-        body: ["var(--font-body)", "ui-sans-serif", "system-ui", "sans-serif"],
+        playfair: [typography.display, "Georgia", "serif"],
+        inter: [typography.body, "ui-sans-serif", "system-ui", "sans-serif"],
       },
       fontSize: {
         h1: [
-          "var(--type-h1-size)",
+          typography.h1.mobile,
           {
-            lineHeight: "var(--type-h1-leading)",
-            letterSpacing: "var(--type-h1-tracking)",
-            fontWeight: "700",
+            lineHeight: typography.h1.lineHeight,
+            letterSpacing: typography.h1.tracking,
+            fontWeight: typography.h1.weight,
+          },
+        ],
+        "h1-desktop": [
+          typography.h1.desktop,
+          {
+            lineHeight: typography.h1.lineHeight,
+            letterSpacing: typography.h1.tracking,
+            fontWeight: typography.h1.weight,
           },
         ],
         h2: [
-          "var(--type-h2-size)",
+          typography.h2.mobile,
           {
-            lineHeight: "var(--type-h2-leading)",
-            letterSpacing: "var(--type-h2-tracking)",
-            fontWeight: "700",
+            fontWeight: typography.h2.weight,
           },
         ],
-        h3: [
-          "var(--type-h3-size)",
+        "h2-desktop": [
+          typography.h2.desktop,
           {
-            lineHeight: "var(--type-h3-leading)",
-            letterSpacing: "var(--type-h3-tracking)",
-            fontWeight: "600",
-          },
-        ],
-        body: [
-          "var(--type-body-size)",
-          {
-            lineHeight: "var(--type-body-leading)",
-            fontWeight: "400",
-          },
-        ],
-        label: [
-          "var(--type-label-size)",
-          {
-            lineHeight: "1.4",
-            letterSpacing: "var(--type-label-tracking)",
-            fontWeight: "600",
+            fontWeight: typography.h2.weight,
           },
         ],
       },
       maxWidth: {
-        content: "var(--content-max-width)",
+        content: spacing.contentMaxWidth,
       },
       spacing: {
-        "section-mobile": "var(--section-padding-mobile)",
-        "section-desktop": "var(--section-padding-desktop)",
-        gutter: "var(--column-gap)",
+        "section-mobile": spacing.sectionPaddingMobile,
+        "section-desktop": spacing.sectionPaddingDesktop,
       },
-      transitionTimingFunction: {
-        signature: "var(--ease-signature)",
-      },
-      transitionDuration: {
-        micro: "var(--duration-micro)",
-        short: "var(--duration-short)",
-        medium: "var(--duration-medium)",
-      },
-      boxShadow: {
-        focus: "var(--focus-ring)",
+      borderRadius: {
+        none: radii.none,
+        DEFAULT: radii.none,
+        sm: radii.none,
+        md: radii.none,
+        lg: radii.none,
+        xl: radii.none,
+        "2xl": radii.none,
+        "3xl": radii.none,
+        full: radii.none,
       },
     },
   },

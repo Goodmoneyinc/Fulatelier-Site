@@ -1,16 +1,23 @@
 # Fulatelier Site
 
-Mississippi-focused digital workshop marketplace.
+Boutique web development studio site for **Fulatelier LLC**.
+
+## Stack
+
+Next.js 14 (App Router) · TypeScript · Tailwind CSS · Framer Motion
 
 ## Design system
 
-Canonical tokens and quality gate:
+Single source of truth: [`lib/constants.ts`](lib/constants.ts)
 
-- [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md)
-- [`docs/QUALITY_BAR.md`](docs/QUALITY_BAR.md) — **all 8 criteria required per section**
-- [`lib/design-system.ts`](lib/design-system.ts)
-- [`styles/globals.css`](styles/globals.css)
+- Docs: [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md)
+- Quality gate (all 8 required): [`docs/QUALITY_BAR.md`](docs/QUALITY_BAR.md)
+- Global styles: [`styles/globals.css`](styles/globals.css)
 
-## Stack (target)
+## Scripts
 
-Next.js 14 App Router · TypeScript · Tailwind CSS · Supabase · Stripe · WCAG 2.1 AA
+```bash
+npm run dev
+npm run build
+npx tsc --noEmit
+```
