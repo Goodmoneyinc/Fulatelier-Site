@@ -14,6 +14,15 @@ import { navLinks } from "@/lib/constants";
 
 const SCROLL_THRESHOLD = 80;
 
+/** Navy-tinted elevation — reads as lifted off the page, not a gray drop-shadow */
+const SHADOW_REST =
+  "shadow-[0_8px_28px_rgba(5,13,26,0.45),0_2px_8px_rgba(5,13,26,0.35)]";
+const SHADOW_SCROLLED =
+  "shadow-[0_14px_40px_rgba(5,13,26,0.65),0_4px_12px_rgba(5,13,26,0.45)]";
+
+const navLinkClassName =
+  "nav-link relative font-inter text-xs font-medium uppercase tracking-[0.15em] text-text transition-colors duration-300 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 export function Nav() {
   const reduceMotion = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
@@ -121,23 +130,22 @@ export function Nav() {
       };
 
   return (
-    <header
-      className={[
-        "fixed inset-x-0 top-0 z-50 w-full transition-[background-color,border-color] duration-300 ease-out",
-        scrolled
-          ? "border-b border-accent/40 bg-background"
-          : "border-b border-transparent bg-transparent",
-      ].join(" ")}
-    >
+    <header className="pointer-events-none fixed inset-x-4 top-4 z-50 lg:inset-x-8 lg:top-6">
       <nav
-        className="mx-auto flex h-16 max-w-content items-center justify-between gap-6 px-6 lg:h-20 lg:px-8"
+        className={[
+          "pointer-events-auto mx-auto flex h-16 w-full max-w-3xl items-center justify-between gap-6 border border-accent/20 px-6 backdrop-blur-md lg:h-20 lg:px-8",
+          "rounded-none transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          scrolled
+            ? `bg-card/95 ${SHADOW_SCROLLED}`
+            : `bg-card/85 ${SHADOW_REST}`,
+        ].join(" ")}
         aria-label="Primary"
       >
         <a
           href="#main"
           className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <LogoMark animateIn />
+          <LogoMark className="h-9 w-9 shrink-0" />
           <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
             FULATELIER
           </span>
@@ -147,10 +155,7 @@ export function Nav() {
           <ul className="flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="nav-link relative font-inter text-xs font-medium uppercase tracking-[0.15em] text-text transition-colors duration-300 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
+                <a href={link.href} className={navLinkClassName}>
                   {link.label}
                 </a>
               </li>
@@ -200,7 +205,7 @@ export function Nav() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
+            className="pointer-events-auto fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
             initial={overlayMotion.initial}
             animate={overlayMotion.animate}
             exit={overlayMotion.exit}
@@ -212,7 +217,7 @@ export function Nav() {
                 className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 onClick={closeMenu}
               >
-                <LogoMark />
+                <LogoMark className="h-9 w-9 shrink-0" />
                 <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
                   FULATELIER
                 </span>

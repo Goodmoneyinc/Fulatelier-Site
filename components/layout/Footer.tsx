@@ -74,7 +74,7 @@ export function Footer() {
               href="#main"
               className="inline-flex items-center gap-3 text-subtle transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
             >
-              <LogoMark />
+              <LogoMark className="h-9 w-9 shrink-0" />
               <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
                 Fulatelier LLC
               </span>
