@@ -15,7 +15,11 @@ const config: Config = {
     extend: {
       colors: {
         background: colors.background,
-        accent: colors.accent,
+        accent: {
+          DEFAULT: colors.accent,
+          /** WCAG-safe gold for small text on card surfaces */
+          light: colors.goldLight,
+        },
         "gold-light": colors.goldLight,
         text: colors.text,
         subtle: colors.subtle,
