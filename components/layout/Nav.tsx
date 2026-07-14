@@ -14,6 +14,16 @@ import { navLinks } from "@/lib/constants";
 
 const SCROLL_THRESHOLD = 80;
 
+const leftLinks = navLinks.filter(
+  (link) => link.label === "Work" || link.label === "Services",
+);
+const rightLinks = navLinks.filter(
+  (link) => link.label === "Pricing" || link.label === "Contact",
+);
+
+const navLinkClassName =
+  "nav-link relative font-inter text-xs font-medium uppercase tracking-[0.15em] text-text transition-colors duration-300 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 export function Nav() {
   const reduceMotion = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
@@ -130,12 +140,26 @@ export function Nav() {
       ].join(" ")}
     >
       <nav
-        className="mx-auto flex h-16 max-w-content items-center justify-between gap-6 px-6 lg:h-20 lg:px-8"
+        className="mx-auto grid h-16 max-w-content grid-cols-3 items-center px-6 lg:h-20 lg:px-8"
         aria-label="Primary"
       >
+        {/* Left — Work / Services (desktop); empty cell on mobile keeps logo centered */}
+        <div className="justify-self-start">
+          <ul className="hidden items-center gap-8 lg:flex">
+            {leftLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className={navLinkClassName}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Center — logo */}
         <a
           href="#main"
-          className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="group justify-self-center flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <LogoMark animateIn />
           <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
@@ -143,53 +167,53 @@ export function Nav() {
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 lg:flex">
-          <ul className="flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="nav-link relative font-inter text-xs font-medium uppercase tracking-[0.15em] text-text transition-colors duration-300 ease-out hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <Button href="#contact">Get Started</Button>
-        </div>
+        {/* Right — Pricing / Contact / CTA (desktop) or hamburger (mobile) */}
+        <div className="justify-self-end">
+          <div className="hidden items-center gap-8 lg:flex">
+            <ul className="flex items-center gap-8">
+              {rightLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className={navLinkClassName}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <Button href="#contact">Get Started</Button>
+          </div>
 
-        <button
-          ref={openButtonRef}
-          type="button"
-          className="relative flex h-11 w-11 items-center justify-center text-accent transition-colors duration-200 ease-out hover:text-accent-light lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls={menuId}
-          onClick={() => (menuOpen ? closeMenu() : openMenu())}
-        >
-          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
-          <span className="relative block h-3.5 w-5" aria-hidden="true">
-            <span
-              className={[
-                "absolute left-0 top-0 block h-px w-full bg-current transition-transform duration-300 ease-out",
-                menuOpen ? "translate-y-[7px] rotate-45" : "",
-              ].join(" ")}
-            />
-            <span
-              className={[
-                "absolute left-0 top-1/2 block h-px w-full -translate-y-1/2 bg-current transition-opacity duration-300 ease-out",
-                menuOpen ? "opacity-0" : "opacity-100",
-              ].join(" ")}
-            />
-            <span
-              className={[
-                "absolute bottom-0 left-0 block h-px w-full bg-current transition-transform duration-300 ease-out",
-                menuOpen ? "-translate-y-[7px] -rotate-45" : "",
-              ].join(" ")}
-            />
-          </span>
-        </button>
+          <button
+            ref={openButtonRef}
+            type="button"
+            className="relative flex h-11 w-11 items-center justify-center text-accent transition-colors duration-200 ease-out hover:text-accent-light lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            onClick={() => (menuOpen ? closeMenu() : openMenu())}
+          >
+            <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
+            <span className="relative block h-3.5 w-5" aria-hidden="true">
+              <span
+                className={[
+                  "absolute left-0 top-0 block h-px w-full bg-current transition-transform duration-300 ease-out",
+                  menuOpen ? "translate-y-[7px] rotate-45" : "",
+                ].join(" ")}
+              />
+              <span
+                className={[
+                  "absolute left-0 top-1/2 block h-px w-full -translate-y-1/2 bg-current transition-opacity duration-300 ease-out",
+                  menuOpen ? "opacity-0" : "opacity-100",
+                ].join(" ")}
+              />
+              <span
+                className={[
+                  "absolute bottom-0 left-0 block h-px w-full bg-current transition-transform duration-300 ease-out",
+                  menuOpen ? "-translate-y-[7px] -rotate-45" : "",
+                ].join(" ")}
+              />
+            </span>
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>

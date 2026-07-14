@@ -5,6 +5,7 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 import { BlueprintGrid } from "@/components/ui/BlueprintGrid";
 import { BlueprintSketch } from "@/components/ui/BlueprintSketch";
 import { Button } from "@/components/ui/Button";
+import { LogoMark } from "@/components/ui/LogoMark";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -97,16 +98,13 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
         aria-hidden="true"
       >
-        <BlueprintSketch className="mx-auto h-auto w-full max-w-[1000px] text-accent opacity-[0.08]" />
+        <BlueprintSketch className="mx-auto h-auto w-full max-w-[1000px] text-accent opacity-[0.22]" />
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
-        <motion.p
-          className="mb-6 font-inter text-[11px] font-semibold uppercase tracking-[0.3em] text-accent"
-          {...fadeUp(0.2)}
-        >
-          Boutique Web Development · Est. 2024
-        </motion.p>
+        <motion.div className="mb-6 [&_svg]:h-14 [&_svg]:w-14" {...fadeUp(0.2)}>
+          <LogoMark />
+        </motion.div>
 
         <Headline />
 
