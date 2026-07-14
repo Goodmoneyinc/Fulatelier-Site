@@ -145,7 +145,7 @@ export function Nav() {
           href="#main"
           className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <LogoMark className="h-12 w-12 shrink-0" />
+          <LogoMark className="h-14 w-14 shrink-0" />
           <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
             FULATELIER
           </span>
@@ -217,7 +217,7 @@ export function Nav() {
                 className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 onClick={closeMenu}
               >
-                <LogoMark className="h-12 w-12 shrink-0" />
+                <LogoMark className="h-14 w-14 shrink-0" />
                 <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
                   FULATELIER
                 </span>
