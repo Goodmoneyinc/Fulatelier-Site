@@ -102,8 +102,8 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
-        <motion.div className="mb-6 [&_svg]:h-14 [&_svg]:w-14" {...fadeUp(0.2)}>
-          <LogoMark />
+        <motion.div className="mb-6" {...fadeUp(0.2)}>
+          <LogoMark className="h-14 w-14" />
         </motion.div>
 
         <Headline />

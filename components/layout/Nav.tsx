@@ -130,10 +130,10 @@ export function Nav() {
       };
 
   return (
-    <header className="pointer-events-none fixed inset-x-4 top-4 z-50 mx-auto w-auto max-w-content lg:inset-x-8 lg:top-6">
+    <header className="pointer-events-none fixed inset-x-4 top-4 z-50 lg:inset-x-8 lg:top-6">
       <nav
         className={[
-          "pointer-events-auto flex h-16 items-center justify-between gap-6 border border-accent/20 px-6 backdrop-blur-md lg:h-20 lg:px-8",
+          "pointer-events-auto mx-auto flex h-16 w-full max-w-3xl items-center justify-between gap-6 border border-accent/20 px-6 backdrop-blur-md lg:h-20 lg:px-8",
           "rounded-none transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
           scrolled
             ? `bg-card/95 ${SHADOW_SCROLLED}`
@@ -145,7 +145,7 @@ export function Nav() {
           href="#main"
           className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
-          <LogoMark animateIn />
+          <LogoMark className="h-9 w-9 shrink-0" />
           <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
             FULATELIER
           </span>
@@ -217,7 +217,7 @@ export function Nav() {
                 className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 onClick={closeMenu}
               >
-                <LogoMark />
+                <LogoMark className="h-9 w-9 shrink-0" />
                 <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
                   FULATELIER
                 </span>
