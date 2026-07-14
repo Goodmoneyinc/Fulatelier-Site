@@ -38,6 +38,15 @@
   html {
     color-scheme: dark;
     scroll-behavior: smooth;
+    /* Floating nav clearance: top-4 + h-16 (mobile) */
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      /* top-6 + h-20 + breathing room */
+      scroll-padding-top: 7.5rem;
+    }
   }
 
   body {
