@@ -10,13 +10,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { LogoMark } from "@/components/ui/LogoMark";
-
-const NAV_LINKS = [
-  { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Contact", href: "#contact" },
-] as const;
+import { navLinks } from "@/lib/constants";
 
 const SCROLL_THRESHOLD = 80;
 
@@ -151,7 +145,7 @@ export function Nav() {
 
         <div className="hidden items-center gap-8 lg:flex">
           <ul className="flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -238,7 +232,7 @@ export function Nav() {
             </div>
 
             <ul className="flex flex-1 flex-col justify-center gap-6 px-6 pb-20">
-              {NAV_LINKS.map((link, index) => (
+              {navLinks.map((link, index) => (
                 <li key={link.href}>
                   <motion.a
                     href={link.href}

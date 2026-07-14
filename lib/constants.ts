@@ -24,9 +24,12 @@ export const colors = {
    * on both navy and card backgrounds. Do not darken.
    */
   subtle: "#8A9AB0",
-  /** Card / panel surface */
+  /** Card / panel surface — one step lighter than page background */
   cardBg: "#1A2A40",
-  /** Footer background — one step darker than page background */
+  /**
+   * Footer background — tonal variant of `background`, one step darker
+   * (`#050D1A` vs `#0A1628`). Not a new hue; same navy family for depth.
+   */
   footerBg: "#050D1A",
 } as const;
 
@@ -74,4 +77,13 @@ export const social = {
   linkedin: "https://www.linkedin.com/company/fulatelier", // TODO: replace with real LinkedIn URL
 } as const;
 
+/** Primary site navigation — shared by Nav and Footer. */
+export const navLinks = [
+  { label: "Work", href: "#work" },
+  { label: "Services", href: "#services" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
+] as const;
+
 export type ColorToken = keyof typeof colors;
+export type NavLink = (typeof navLinks)[number];
