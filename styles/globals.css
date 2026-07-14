@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Fulatelier global styles
+ * Token values mirror lib/constants.ts — keep in sync when changing the design system.
+ */
+
+:root {
+  --color-background: #0a1628;
+  --color-accent: #a37e2c;
+  --color-gold-light: #c9a84c;
+  --color-text: #f2ede4;
+  --color-subtle: #8a9ab0;
+  --color-card: #1a2a40;
+  --color-footer: #050d1a;
+
+  --section-padding-mobile: 80px;
+  --section-padding-desktop: 120px;
+  --content-max-width: 1200px;
+
+  --type-h1-mobile: 48px;
+  --type-h1-desktop: 88px;
+  --type-h2-mobile: 32px;
+  --type-h2-desktop: 56px;
+
+  --radius: 0px;
+  --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
+  --focus-ring: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-gold-light);
+}
+
+@layer base {
+  * {
+    border-radius: var(--radius);
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: var(--type-h1-mobile);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  h2 {
+    font-size: var(--type-h2-mobile);
+    line-height: 1.15;
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: var(--type-h1-desktop);
+    }
+
+    h2 {
+      font-size: var(--type-h2-desktop);
+    }
+  }
+
+  a {
+    color: inherit;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Nav link underline — slides in from left on hover/focus */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms var(--ease-signature);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .nav-link::after {
+    transition: none;
+  }
+}
