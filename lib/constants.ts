@@ -65,10 +65,13 @@ export const radii = {
 
 /**
  * External social / community destinations.
- * TODO: Replace buildLog with the live Fulatelier Facebook Build Log URL.
+ * TODO: Replace these placeholder URLs with the live Fulatelier profiles.
  */
 export const social = {
+  /** Primary Build Log destination (Facebook) — used by Work + Build Log sections */
   buildLog: "https://www.facebook.com/fulatelier", // TODO: replace with real Build Log URL
+  facebook: "https://www.facebook.com/fulatelier", // TODO: replace with real Facebook URL
+  linkedin: "https://www.linkedin.com/company/fulatelier", // TODO: replace with real LinkedIn URL
 } as const;
 
 export type ColorToken = keyof typeof colors;
