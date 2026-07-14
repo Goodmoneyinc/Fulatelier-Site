@@ -7,12 +7,13 @@ interface LogoMarkProps {
 export function LogoMark({ className }: LogoMarkProps) {
   return (
     <Image
-      src="/logo-fulatelier.png"
+      src="/logo-fulatelier-v2.png"
       alt="Fulatelier"
       width={256}
       height={256}
       className={className}
       priority
+      unoptimized
     />
   );
 }
