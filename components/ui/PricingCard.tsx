@@ -52,12 +52,12 @@ export function PricingCard({
       className={[
         "relative flex h-full flex-col bg-card p-8 lg:p-9",
         popular
-          ? "border border-accent lg:-translate-y-4"
+          ? "border border-accent lg:-translate-y-4 motion-reduce:lg:translate-y-0"
           : "border border-accent/30",
       ].join(" ")}
     >
       {popular ? (
-        <p className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 bg-accent px-3 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.2em] text-text">
+        <p className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 bg-accent px-3 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.2em] text-background">
           Most Popular
         </p>
       ) : null}

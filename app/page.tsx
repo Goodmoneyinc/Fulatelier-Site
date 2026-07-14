@@ -1,4 +1,5 @@
 import { BuildLog } from "@/components/sections/BuildLog";
+import { Contact } from "@/components/sections/Contact";
 import { Hero } from "@/components/sections/Hero";
 import { Pricing } from "@/components/sections/Pricing";
 import { Process } from "@/components/sections/Process";
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Process />
       <Pricing />
       <BuildLog />
+      <Contact />
     </main>
   );
 }

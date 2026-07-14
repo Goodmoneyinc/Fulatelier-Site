@@ -30,7 +30,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   outline:
     "border border-accent bg-transparent text-text hover:border-gold-light hover:bg-gold-light hover:text-background",
   solid:
-    "border border-accent bg-accent text-text hover:border-gold-light hover:bg-gold-light hover:text-background",
+    "border border-accent bg-accent text-background hover:border-gold-light hover:bg-gold-light hover:text-background",
 };
 
 function buildClassName(variant: ButtonVariant, className: string) {

@@ -98,7 +98,7 @@ export function Pricing() {
             Pricing upon request.{" "}
             <a
               href="#contact"
-              className="font-medium text-accent underline decoration-accent underline-offset-4 transition-colors duration-200 hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="font-medium text-accent-light underline decoration-accent-light underline-offset-4 transition-colors duration-200 hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               DM to discuss your project.
             </a>

@@ -17,10 +17,43 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteTitle = "Fulatelier LLC";
+const siteDescription =
+  "Boutique web development studio in Jackson, MS — custom websites and SaaS applications, precision crafted.";
+
 export const metadata: Metadata = {
-  title: "Fulatelier LLC",
-  description:
-    "Boutique web development studio building high-performance, accessible digital products.",
+  title: {
+    default: siteTitle,
+    template: `%s · ${siteTitle}`,
+  },
+  description: siteDescription,
+  applicationName: siteTitle,
+  keywords: [
+    "web development",
+    "Jackson MS",
+    "Next.js",
+    "custom websites",
+    "SaaS development",
+    "Fulatelier",
+  ],
+  authors: [{ name: "Fulatelier LLC" }],
+  creator: "Fulatelier LLC",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

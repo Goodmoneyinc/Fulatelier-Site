@@ -162,7 +162,7 @@ export function Nav() {
         <button
           ref={openButtonRef}
           type="button"
-          className="relative flex h-11 w-11 items-center justify-center text-accent lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="relative flex h-11 w-11 items-center justify-center text-accent transition-colors duration-200 ease-out hover:text-accent-light lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           aria-controls={menuId}
@@ -220,7 +220,7 @@ export function Nav() {
               <button
                 ref={closeButtonRef}
                 type="button"
-                className="relative flex h-11 w-11 items-center justify-center text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="relative flex h-11 w-11 items-center justify-center text-accent transition-colors duration-200 ease-out hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label="Close menu"
                 onClick={closeMenu}
               >
