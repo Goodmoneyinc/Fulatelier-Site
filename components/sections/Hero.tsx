@@ -97,7 +97,7 @@ export function Hero() {
       className="relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
-      {/* z-0 — base atmospheric background */}
+      {/* z-0 — base atmospheric background (blueprint left / glass corner right) */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -106,12 +106,12 @@ export function Hero() {
           src="/hero-bg-final.png"
           alt=""
           fill
-          className="object-cover object-center"
+          className="object-cover object-center opacity-100"
           priority
         />
       </div>
 
-      {/* z-[1] — persistent compass layer (does not fade; screen-blend over atmosphere) */}
+      {/* z-[1] — persistent compass layer; 35% so atmosphere stays readable under screen-blend */}
       <div
         className="pointer-events-none absolute inset-0 z-[1]"
         aria-hidden="true"
@@ -120,7 +120,7 @@ export function Hero() {
           src="/dark-atelier-wide-final.png"
           alt=""
           fill
-          className="object-cover object-left-bottom opacity-60 mix-blend-screen"
+          className="object-cover object-left-bottom opacity-[0.35] mix-blend-screen"
           priority
         />
       </div>
@@ -132,10 +132,10 @@ export function Hero() {
       */}
       <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 pb-section-mobile pt-28 text-center lg:px-8 lg:pb-section-desktop lg:pt-32">
         <div
-          className="pointer-events-none mb-10 w-full max-w-[520px] shrink-0 sm:mb-12 sm:max-w-[580px] md:mb-14 md:max-w-[640px] lg:mb-16 lg:max-w-[680px]"
+          className="pointer-events-none mb-10 w-full max-w-[520px] shrink-0 bg-transparent sm:mb-12 sm:max-w-[580px] md:mb-14 md:max-w-[640px] lg:mb-16 lg:max-w-[680px]"
           aria-hidden="true"
         >
-          <DraftingScene className="mx-auto h-auto w-full" />
+          <DraftingScene className="mx-auto h-auto w-full bg-transparent" />
         </div>
 
         <motion.div

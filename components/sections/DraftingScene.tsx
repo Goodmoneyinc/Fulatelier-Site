@@ -96,24 +96,22 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
   if (reduceMotion) {
     return (
       <div
-        className={`pointer-events-none flex items-center justify-center ${className}`.trim()}
+        className={`pointer-events-none flex items-center justify-center bg-transparent ${className}`.trim()}
         aria-hidden="true"
       >
-        <div className="relative w-full max-w-[1000px]">
-          <GlassMockupImage />
-        </div>
+        <GlassMockupImage />
       </div>
     );
   }
 
   return (
     <div
-      className={`pointer-events-none flex items-center justify-center ${className}`.trim()}
+      className={`pointer-events-none flex items-center justify-center bg-transparent ${className}`.trim()}
       style={{ perspective: "1200px" }}
       aria-hidden="true"
     >
       <div
-        className="relative w-full max-w-[1000px]"
+        className="relative w-full max-w-[1000px] bg-transparent"
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* Isometric grid plane — recedes as the wireframe lifts */}
@@ -177,7 +175,7 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
           animate={{ rotateX: 0, rotateZ: 0 }}
           transition={standTransition}
         >
-          {/* Soft lift shadow — grows as the frame leaves the table */}
+          {/* Soft lift shadow — peaks mid stand-up, clears as glass photo resolves */}
           <motion.div
             className="pointer-events-none absolute left-[12%] right-[12%] top-[78%] h-[8%] rounded-[100%]"
             style={{
@@ -185,13 +183,22 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
                 "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%)",
             }}
             initial={{ opacity: 0, filter: "blur(4px)", scaleX: 0.85 }}
-            animate={{ opacity: 0.55, filter: "blur(14px)", scaleX: 1 }}
-            transition={standTransition}
+            animate={{
+              opacity: [0, 0.55, 0],
+              filter: ["blur(4px)", "blur(14px)", "blur(14px)"],
+              scaleX: [0.85, 1, 1],
+            }}
+            transition={{
+              duration: ms(STAND_DURATION_MS) + ms(FILL_DURATION_MS),
+              delay: ms(STAND_DELAY_MS),
+              ease: EASE,
+              times: [0, 0.5, 1],
+            }}
           />
 
           {/* Phase 1 wireframe — fades out as Phase 3 fills in */}
           <motion.div
-            className="relative text-accent"
+            className="relative bg-transparent text-accent"
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
             transition={fillTransition}
@@ -212,9 +219,9 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
             />
           </motion.div>
 
-          {/* Phase 3 — photographic glass mockup (1250ms / 350ms) */}
+          {/* Phase 3 — photographic glass mockup (1250ms / 350ms); no box chrome */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex items-center justify-center bg-transparent"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={fillTransition}
@@ -227,16 +234,22 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
   );
 }
 
-/** Resolved Phase 3 payoff — finished glass mockup, same role as former SVG fill. */
+/**
+ * Resolved Phase 3 payoff — finished glass mockup.
+ * Wrapper is intentionally unstyled (no bg/border/padding) so only the
+ * PNG's own pixels show. `unoptimized` preserves the alpha channel
+ * (source was re-keyed to RGBA; optimizer can flatten transparency).
+ */
 function GlassMockupImage() {
   return (
     <Image
       src="/glass-mockup-final.png"
       alt=""
-      width={800}
-      height={447}
-      className="h-auto w-[92%] max-w-[880px] object-contain"
+      width={1376}
+      height={768}
+      className="h-auto w-full bg-transparent object-contain"
       priority
+      unoptimized
     />
   );
 }
