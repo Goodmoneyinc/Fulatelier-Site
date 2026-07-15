@@ -49,7 +49,7 @@ function Headline() {
   return (
     <h1
       id="hero-heading"
-      className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-text lg:text-h1-desktop"
+      className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-text [text-shadow:0_2px_16px_rgba(10,22,40,0.6)] lg:text-h1-desktop"
     >
       {HEADLINE_LINES.map((line) => {
         const words = line.split(" ");
@@ -78,7 +78,8 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Stack: atmospheric bg (z-0) → left compass blend (z-[1]) → DraftingScene (z-10) → copy (z-10).
+ * Stack: atmospheric bg (z-0) → left compass (z-[1]) → DraftingScene + copy (z-10).
+ * DraftingScene sits in document flow above the headline so they never collide.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -93,7 +94,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
+      className="relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
       {/* z-0 — full-bleed atmospheric base (blueprint left / glass corner shard right) */}
@@ -129,15 +130,19 @@ export function Hero() {
         />
       </div>
 
-      {/* DraftingScene — center empty region of the atmospheric plate */}
-      <div
-        className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4"
-        aria-hidden="true"
-      >
-        <DraftingScene className="mx-auto h-auto w-full max-w-[1000px]" />
-      </div>
+      {/*
+        z-10 content column: DraftingScene first (~12% smaller than prior
+        max-w-[1000px]), then logo/headline with margin-bottom breathing room.
+        Document flow guarantees no mockup↔headline overlap on any breakpoint.
+      */}
+      <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 pb-section-mobile pt-28 text-center lg:px-8 lg:pb-section-desktop lg:pt-32">
+        <div
+          className="pointer-events-none mb-10 w-full max-w-[520px] shrink-0 bg-transparent sm:mb-12 sm:max-w-[600px] md:mb-14 md:max-w-[720px] lg:mb-16 lg:max-w-[880px]"
+          aria-hidden="true"
+        >
+          <DraftingScene className="mx-auto h-auto w-full bg-transparent" />
+        </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
         <motion.div
           className="mb-6 origin-center"
           initial={
