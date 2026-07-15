@@ -1,18 +1,20 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { DraftingScene } from "@/components/sections/DraftingScene";
 import { ArrowLink } from "@/components/ui/ArrowLink";
-import { BlueprintGrid } from "@/components/ui/BlueprintGrid";
-import { BlueprintSketch } from "@/components/ui/BlueprintSketch";
 import { Button } from "@/components/ui/Button";
 import { LogoMark } from "@/components/ui/LogoMark";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-/** Back-out / overshoot — logo "clicks into place" as the blueprint resolves */
+/** Back-out / overshoot — logo "clicks into place" as the mockup fills in */
 const RESOLVE_EASE = [0.34, 1.56, 0.64, 1] as const;
 
+/** Sync with DraftingScene Phase 3 fill-in (1250ms) */
+const LOGO_RESOLVE_DELAY = 1.25;
+
 const HEADLINE_LINES = ["Precision Built.", "Purpose Driven."] as const;
-const HEADLINE_DELAY = 2.2;
+const HEADLINE_DELAY = 1.7;
 
 function RevealedWord({
   word,
@@ -75,7 +77,8 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Blueprint drafts, then the logo resolves out of the drawing into the stack.
+ * DraftingScene: isometric blueprint → stand upright → filled mockup;
+ * real logo crossfades in as the wireframe fills (Phase 3).
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -93,15 +96,11 @@ export function Hero() {
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <BlueprintGrid animateIn />
-      </div>
-
       <div
-        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
+        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center px-4"
         aria-hidden="true"
       >
-        <BlueprintSketch className="mx-auto h-auto w-full max-w-[1000px] text-accent opacity-[0.22]" />
+        <DraftingScene className="mx-auto h-auto w-full max-w-[1000px]" />
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
@@ -115,7 +114,7 @@ export function Hero() {
           }
           transition={{
             duration: 0.6,
-            delay: 1.75,
+            delay: reduceMotion ? 0 : LOGO_RESOLVE_DELAY,
             ease: reduceMotion ? EASE : RESOLVE_EASE,
           }}
         >
@@ -126,7 +125,7 @@ export function Hero() {
 
         <motion.p
           className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle"
-          {...fadeUp(2.5)}
+          {...fadeUp(2.0)}
         >
           Custom websites and web applications built to perform — not just to
           exist.
@@ -134,7 +133,7 @@ export function Hero() {
 
         <motion.div
           className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
-          {...fadeUp(2.7)}
+          {...fadeUp(2.2)}
         >
           <Button href="#contact" variant="solid">
             Start Your Project
