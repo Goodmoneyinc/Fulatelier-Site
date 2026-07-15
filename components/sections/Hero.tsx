@@ -10,8 +10,8 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 /** Back-out / overshoot — logo "clicks into place" as the mockup fills in */
 const RESOLVE_EASE = [0.34, 1.56, 0.64, 1] as const;
 
-/** Sync with DraftingScene Phase 3 fill-in (1250ms) */
-const LOGO_RESOLVE_DELAY = 1.25;
+/** Sync with DraftingScene logo resolve (1300ms) */
+const LOGO_RESOLVE_DELAY = 1.3;
 
 const HEADLINE_LINES = ["Precision Built.", "Purpose Driven."] as const;
 const HEADLINE_DELAY = 1.7;
@@ -114,7 +114,7 @@ export function Hero() {
           }
           transition={{
             duration: 0.3,
-            delay: 1.3,
+            delay: reduceMotion ? 0 : LOGO_RESOLVE_DELAY,
             ease: reduceMotion ? EASE : RESOLVE_EASE,
           }}
         >
