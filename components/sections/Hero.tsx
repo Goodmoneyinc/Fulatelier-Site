@@ -12,7 +12,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const RESOLVE_EASE = [0.34, 1.56, 0.64, 1] as const;
 
 const HEADLINE_LINES = ["Precision Built.", "Purpose Driven."] as const;
-const HEADLINE_DELAY = 2.2;
+const HEADLINE_DELAY = 1.7;
 
 function RevealedWord({
   word,
@@ -114,8 +114,8 @@ export function Hero() {
             reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }
           }
           transition={{
-            duration: 0.6,
-            delay: 1.75,
+            duration: 0.3,
+            delay: 1.3,
             ease: reduceMotion ? EASE : RESOLVE_EASE,
           }}
         >
@@ -126,7 +126,7 @@ export function Hero() {
 
         <motion.p
           className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle"
-          {...fadeUp(2.5)}
+          {...fadeUp(2.0)}
         >
           Custom websites and web applications built to perform — not just to
           exist.
@@ -134,7 +134,7 @@ export function Hero() {
 
         <motion.div
           className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
-          {...fadeUp(2.7)}
+          {...fadeUp(2.2)}
         >
           <Button href="#contact" variant="solid">
             Start Your Project
