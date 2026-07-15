@@ -142,7 +142,7 @@ export function Nav() {
         aria-label="Primary"
       >
         <a
-          href="#main"
+          href="#main-content"
           className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <LogoMark className="h-14 w-14 shrink-0" />
@@ -213,7 +213,7 @@ export function Nav() {
           >
             <div className="flex h-16 items-center justify-between px-6">
               <a
-                href="#main"
+                href="#main-content"
                 className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 onClick={closeMenu}
               >

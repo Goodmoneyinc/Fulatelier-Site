@@ -9,7 +9,7 @@ import { Work } from "@/components/sections/Work";
 
 export default function HomePage() {
   return (
-    <main id="main">
+    <>
       <Hero />
       <StatStrip />
       <Services />
@@ -18,6 +18,6 @@ export default function HomePage() {
       <Pricing />
       <BuildLog />
       <Contact />
-    </main>
+    </>
   );
 }

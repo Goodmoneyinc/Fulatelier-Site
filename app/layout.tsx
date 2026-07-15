@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { IntroReveal } from "@/components/intro/IntroReveal";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import "@/styles/globals.css";
@@ -64,8 +65,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col bg-background font-inter text-text antialiased">
+        <IntroReveal />
         <Nav />
-        <div className="flex-1">{children}</div>
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="flex-1 outline-none"
+        >
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
