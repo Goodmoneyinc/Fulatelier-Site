@@ -1,42 +1,64 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { social } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const PROJECTS = [
-  {
+const PROJECTS = {
+  anderson: {
     title: "Anderson Contracting Co.",
     badge: "Contractor · Concept Build",
     description:
       "A Mississippi general contractor site that leads with job-site photography, service areas across the Gulf Coast, and a direct estimate request flow built for busy owners on their phones.",
     url: "andersoncontracting.co",
-    featured: true,
   },
-  {
+  magnolia: {
     title: "Magnolia Boutique",
     badge: "Retail · Concept Build",
     description:
       "An elegant boutique storefront for a Jackson retailer — seasonal lookbooks, inventory-aware product grids, and a checkout path that feels as considered as the racks on Fondren.",
     url: "magnoliaboutique.shop",
   },
-  {
+  river: {
     title: "River City Eats",
     badge: "Restaurant · Concept Build",
     description:
       "A Vicksburg restaurant presence with tonight’s menu, reservation prompts, and event nights — designed so locals and river travelers can decide where to eat in under a minute.",
     url: "rivercityeats.com",
   },
+} as const;
+
+const PROJECT_LIST = [
+  PROJECTS.anderson,
+  PROJECTS.magnolia,
+  PROJECTS.river,
 ] as const;
 
 /**
- * Work — portfolio grid. Featured project full-width, then a 50/50 pair.
+ * Work — staggered floating parallax collage on md+,
+ * simple full-width stack below md.
  */
 export function Work() {
   const reduceMotion = useReducedMotion();
-  const [featured, ...rest] = PROJECTS;
+  const collageRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: collageRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Distinct speeds so cards drift independently through the section
+  const andersonY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const magnoliaY = useTransform(scrollYProgress, [0, 1], [-70, 70]);
+  const riverY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
 
   return (
     <section
@@ -57,25 +79,65 @@ export function Work() {
           </h2>
         </div>
 
-        <div className="mt-12 space-y-10 lg:mt-16 lg:space-y-12">
-          <ProjectCard
-            title={featured.title}
-            badge={featured.badge}
-            description={featured.description}
-            url={featured.url}
-            featured
-          />
-
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-8">
-            {rest.map((project) => (
+        {/* Scroll target wraps both layouts so useScroll always has measurable bounds */}
+        <div ref={collageRef} className="mt-12 lg:mt-16">
+          {/* Mobile — normal stacked flow, no offsets / parallax */}
+          <div className="space-y-10 md:hidden">
+            {PROJECT_LIST.map((project) => (
               <ProjectCard
                 key={project.title}
                 title={project.title}
                 badge={project.badge}
                 description={project.description}
                 url={project.url}
+                featured={project.title === PROJECTS.magnolia.title}
               />
             ))}
+          </div>
+
+          {/* Desktop — asymmetric staggered collage with scroll-linked parallax */}
+          <div className="relative hidden pt-12 pb-8 md:block lg:pb-12 lg:pt-16">
+            <div className="grid grid-cols-3 items-start gap-6 lg:gap-8 xl:gap-10">
+              {/* Anderson — left, lower */}
+              <motion.div
+                className="col-span-1 mt-16 lg:mt-24"
+                style={reduceMotion ? undefined : { y: andersonY }}
+              >
+                <ProjectCard
+                  title={PROJECTS.anderson.title}
+                  badge={PROJECTS.anderson.badge}
+                  description={PROJECTS.anderson.description}
+                  url={PROJECTS.anderson.url}
+                />
+              </motion.div>
+
+              {/* Magnolia — center, higher, visually dominant (featured frame) */}
+              <motion.div
+                className="relative z-10 col-span-1 -mt-8 lg:-mt-12"
+                style={reduceMotion ? undefined : { y: magnoliaY }}
+              >
+                <ProjectCard
+                  title={PROJECTS.magnolia.title}
+                  badge={PROJECTS.magnolia.badge}
+                  description={PROJECTS.magnolia.description}
+                  url={PROJECTS.magnolia.url}
+                  featured
+                />
+              </motion.div>
+
+              {/* River City — right, different lower offset (not mirrored) */}
+              <motion.div
+                className="col-span-1 mt-10 lg:mt-14"
+                style={reduceMotion ? undefined : { y: riverY }}
+              >
+                <ProjectCard
+                  title={PROJECTS.river.title}
+                  badge={PROJECTS.river.badge}
+                  description={PROJECTS.river.description}
+                  url={PROJECTS.river.url}
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
 
