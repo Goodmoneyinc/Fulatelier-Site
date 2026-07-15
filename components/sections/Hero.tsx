@@ -78,8 +78,8 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Stack: hero-bg-final (z-0) → DraftingScene (z-[1]) → copy/CTA (z-10).
- * BlueprintGrid removed — linework is baked into the background image.
+ * Stack: atmospheric bg (z-0) → compass blend (z-[1]) → DraftingScene + copy (z-10).
+ * DraftingScene sits in document flow above the headline so they never collide.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -94,10 +94,10 @@ export function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
+      className="relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
-      {/* Furthest back — full-bleed photographic bg (includes left-edge blueprint linework) */}
+      {/* z-0 — base atmospheric background */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -111,15 +111,33 @@ export function Hero() {
         />
       </div>
 
-      {/* DraftingScene sits in the empty center composed into the bg */}
+      {/* z-[1] — persistent compass layer (does not fade; screen-blend over atmosphere) */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
+        className="pointer-events-none absolute inset-0 z-[1]"
         aria-hidden="true"
       >
-        <DraftingScene className="mx-auto h-auto w-full max-w-[1000px]" />
+        <Image
+          src="/dark-atelier-wide-final.png"
+          alt=""
+          fill
+          className="object-cover object-left-bottom opacity-60 mix-blend-screen"
+          priority
+        />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
+      {/*
+        z-10 content column: DraftingScene first (sized down + margin-bottom),
+        then brand/copy. Document flow guarantees the mockup sits fully above
+        the headline on mobile and desktop — no absolute overlap.
+      */}
+      <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 pb-section-mobile pt-28 text-center lg:px-8 lg:pb-section-desktop lg:pt-32">
+        <div
+          className="pointer-events-none mb-10 w-full max-w-[520px] shrink-0 sm:mb-12 sm:max-w-[580px] md:mb-14 md:max-w-[640px] lg:mb-16 lg:max-w-[680px]"
+          aria-hidden="true"
+        >
+          <DraftingScene className="mx-auto h-auto w-full" />
+        </div>
+
         <motion.div
           className="mb-6 origin-center"
           initial={
