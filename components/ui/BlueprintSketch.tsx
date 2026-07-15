@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const AMBIENT_START_MS = 1800;
+const AMBIENT_START_MS = 900;
 const CIRCLE_PULSE_STAGGER_S = 0.4;
-const GRID_STAGGER_S = 0.08;
+const GRID_STAGGER_S = 0.04;
 
 type BlueprintSketchProps = {
   className?: string;
@@ -93,13 +93,13 @@ export function BlueprintSketch({ className = "" }: BlueprintSketchProps) {
     transformOrigin: "center",
   };
 
-  const outerFrame = { delay: 200, duration: 500 };
-  const chromeBar = { delay: 500, duration: 400 };
-  const gridColumns = { delay: 650, duration: 600 };
-  const crosshair = { delay: 900, duration: 650 };
-  const dimensionLine = { delay: 1300, duration: 400 };
-  const registrationMarks = { delay: 1500, duration: 300 };
-  const registrationDots = { delay: 1550, duration: 250 };
+  const outerFrame = { delay: 100, duration: 250 };
+  const chromeBar = { delay: 250, duration: 200 };
+  const gridColumns = { delay: 350, duration: 300 };
+  const crosshair = { delay: 500, duration: 300 };
+  const dimensionLine = { delay: 650, duration: 200 };
+  const registrationMarks = { delay: 750, duration: 150 };
+  const registrationDots = { delay: 800, duration: 100 };
 
   return (
     <motion.div

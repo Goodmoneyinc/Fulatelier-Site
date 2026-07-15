@@ -113,8 +113,8 @@ export function Hero() {
             reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }
           }
           transition={{
-            duration: 0.6,
-            delay: reduceMotion ? 0 : LOGO_RESOLVE_DELAY,
+            duration: 0.3,
+            delay: 1.3,
             ease: reduceMotion ? EASE : RESOLVE_EASE,
           }}
         >
