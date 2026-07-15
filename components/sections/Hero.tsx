@@ -49,7 +49,7 @@ function Headline() {
   return (
     <h1
       id="hero-heading"
-      className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-text [text-shadow:0_2px_16px_rgba(10,22,40,0.6)] lg:text-h1-desktop"
+      className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-text [text-shadow:0_0_6px_rgba(10,22,40,0.95),0_0_14px_rgba(10,22,40,0.85),0_0_26px_rgba(10,22,40,0.7),0_0_40px_rgba(10,22,40,0.5)] lg:text-h1-desktop"
     >
       {HEADLINE_LINES.map((line) => {
         const words = line.split(" ");
@@ -163,7 +163,7 @@ export function Hero() {
         <Headline />
 
         <motion.p
-          className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle"
+          className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle [text-shadow:0_0_4px_rgba(10,22,40,0.9),0_0_10px_rgba(10,22,40,0.75),0_0_18px_rgba(10,22,40,0.5)]"
           {...fadeUp(2.0)}
         >
           Custom websites and web applications built to perform — not just to
