@@ -78,8 +78,8 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Stack: atmospheric bg (z-0) → compass blend (z-[1]) → DraftingScene + copy (z-10).
- * DraftingScene sits in document flow above the headline so they never collide.
+ * Stack: atmospheric bg (z-0, full-bleed) → compass (z-[1], lower-left only)
+ * → DraftingScene + copy (z-10). Right-side atmosphere (glass shard) stays clear.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -111,16 +111,26 @@ export function Hero() {
         />
       </div>
 
-      {/* z-[1] — persistent compass layer; 35% so atmosphere stays readable under screen-blend */}
+      {/* z-[1] — compass confined to lower-left; soft mask dissolves into atmosphere */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1]"
+        className="pointer-events-none absolute bottom-0 left-0 z-[1] h-[60%] w-[45%] opacity-50 mix-blend-screen"
+        style={{
+          WebkitMaskImage:
+            "radial-gradient(ellipse 95% 95% at 0% 100%, #000 0%, #000 38%, transparent 78%)",
+          maskImage:
+            "radial-gradient(ellipse 95% 95% at 0% 100%, #000 0%, #000 38%, transparent 78%)",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskSize: "100% 100%",
+          maskSize: "100% 100%",
+        }}
         aria-hidden="true"
       >
         <Image
           src="/dark-atelier-wide-final.png"
           alt=""
           fill
-          className="object-cover object-left-bottom opacity-[0.35] mix-blend-screen"
+          className="object-cover object-left-bottom"
           priority
         />
       </div>
