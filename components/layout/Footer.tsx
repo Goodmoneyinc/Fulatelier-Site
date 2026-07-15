@@ -71,7 +71,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-10">
           <div>
             <a
-              href="#main"
+              href="#main-content"
               className="inline-flex items-center gap-3 text-subtle transition-colors duration-200 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
             >
               <LogoMark className="h-9 w-9 shrink-0" />
