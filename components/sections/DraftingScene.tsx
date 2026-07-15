@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useId } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { colors } from "@/lib/constants";
@@ -11,9 +12,22 @@ const GRID_STAGGER_S = 0.04;
 const STAND_DELAY_MS = 900;
 const STAND_DURATION_MS = 500;
 
-/** Phase 3 — outline → filled mockup (overlaps Phase 2 tail) */
+/** Phase 3 — outline → 3D glass panel (overlaps Phase 2 tail) */
 const FILL_DELAY_MS = 1250;
 const FILL_DURATION_MS = 350;
+
+/**
+ * Client-only WebGL panel — SVG FilledMockup is the loading fallback
+ * so Phase 3 never flashes blank while the three.js chunk loads.
+ */
+const DraftedScreen = dynamic(
+  () =>
+    import("@/components/three/DraftedScreen").then((m) => m.DraftedScreen),
+  {
+    ssr: false,
+    loading: () => <FilledMockup />,
+  },
+);
 
 type DraftingSceneProps = {
   className?: string;
@@ -32,7 +46,7 @@ function ms(msValue: number) {
  * Hero drafting narrative:
  * 1. Isometric blueprint table — wireframe draws in (pathLength)
  * 2. Wireframe lifts off the table and rotates upright
- * 3. Outline crossfades into a filled website mockup
+ * 3. Outline crossfades into a real 3D glass DraftedScreen panel
  *
  * Phase geometry / pathLength draw helpers extend the technique from
  * `BlueprintSketch` — timings compressed for the drafting-table story.
@@ -92,14 +106,15 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
     ease: EASE,
   };
 
+  // Reduced motion: skip draft/stand-up; show static 3D panel (SVG while chunk loads)
   if (reduceMotion) {
     return (
       <div
-        className={`pointer-events-none flex items-center justify-center opacity-40 ${className}`.trim()}
+        className={`pointer-events-none flex items-center justify-center opacity-50 ${className}`.trim()}
         aria-hidden="true"
       >
-        <div className="relative w-full max-w-[1000px]">
-          <FilledMockup visible />
+        <div className="relative aspect-[1000/700] w-full max-w-[1000px]">
+          <DraftedScreen staticPose className="absolute inset-0" />
         </div>
       </div>
     );
@@ -211,14 +226,14 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
             />
           </motion.div>
 
-          {/* Phase 3 — filled / rendered website mockup (settles soft so hero copy stays legible) */}
+          {/* Phase 3 — 3D glass panel crossfade (SVG fallback while chunk loads) */}
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.42 }}
+            animate={{ opacity: 1 }}
             transition={fillTransition}
           >
-            <FilledMockup />
+            <DraftedScreen className="absolute inset-0 opacity-90" />
           </motion.div>
         </motion.div>
       </div>
