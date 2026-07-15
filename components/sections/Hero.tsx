@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { DraftingScene } from "@/components/sections/DraftingScene";
 import { ArrowLink } from "@/components/ui/ArrowLink";
@@ -77,8 +78,8 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * DraftingScene: isometric blueprint → stand upright → filled mockup;
- * real logo crossfades in as the wireframe fills (Phase 3).
+ * Stack: hero-bg-final (z-0) → DraftingScene (z-[1]) → copy/CTA (z-10).
+ * BlueprintGrid removed — linework is baked into the background image.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -96,8 +97,23 @@ export function Hero() {
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
+      {/* Furthest back — full-bleed photographic bg (includes left-edge blueprint linework) */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center px-4"
+        className="pointer-events-none absolute inset-0 z-0"
+        aria-hidden="true"
+      >
+        <Image
+          src="/hero-bg-final.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+        />
+      </div>
+
+      {/* DraftingScene sits in the empty center composed into the bg */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
         aria-hidden="true"
       >
         <DraftingScene className="mx-auto h-auto w-full max-w-[1000px]" />
@@ -143,7 +159,7 @@ export function Hero() {
       </div>
 
       <motion.div
-        className="absolute inset-x-0 bottom-0 h-px origin-left bg-accent"
+        className="absolute inset-x-0 bottom-0 z-10 h-px origin-left bg-accent"
         initial={reduceMotion ? { opacity: 0 } : { scaleX: 0, opacity: 1 }}
         whileInView={
           reduceMotion ? { opacity: 1 } : { scaleX: 1, opacity: 1 }
