@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useId } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { colors } from "@/lib/constants";
@@ -11,7 +12,7 @@ const GRID_STAGGER_S = 0.04;
 const STAND_DELAY_MS = 900;
 const STAND_DURATION_MS = 500;
 
-/** Phase 3 — outline → filled mockup (overlaps Phase 2 tail) */
+/** Phase 3 — outline → glass mockup photo (overlaps Phase 2 tail) */
 const FILL_DELAY_MS = 1250;
 const FILL_DURATION_MS = 350;
 
@@ -32,7 +33,7 @@ function ms(msValue: number) {
  * Hero drafting narrative:
  * 1. Isometric blueprint table — wireframe draws in (pathLength)
  * 2. Wireframe lifts off the table and rotates upright
- * 3. Outline crossfades into a filled website mockup
+ * 3. Outline crossfades into /glass-mockup-final.png
  *
  * Phase geometry / pathLength draw helpers extend the technique from
  * `BlueprintSketch` — timings compressed for the drafting-table story.
@@ -95,12 +96,10 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
   if (reduceMotion) {
     return (
       <div
-        className={`pointer-events-none flex items-center justify-center opacity-40 ${className}`.trim()}
+        className={`pointer-events-none flex items-center justify-center bg-transparent ${className}`.trim()}
         aria-hidden="true"
       >
-        <div className="relative w-full max-w-[1000px]">
-          <FilledMockup visible />
-        </div>
+        <GlassMockupImage />
       </div>
     );
   }
@@ -176,7 +175,7 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
           animate={{ rotateX: 0, rotateZ: 0 }}
           transition={standTransition}
         >
-          {/* Soft lift shadow — grows as the frame leaves the table */}
+          {/* Soft lift shadow — clears as the glass photo resolves (no hard box under it) */}
           <motion.div
             className="pointer-events-none absolute left-[12%] right-[12%] top-[78%] h-[8%] rounded-[100%]"
             style={{
@@ -184,13 +183,22 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
                 "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%)",
             }}
             initial={{ opacity: 0, filter: "blur(4px)", scaleX: 0.85 }}
-            animate={{ opacity: 0.55, filter: "blur(14px)", scaleX: 1 }}
-            transition={standTransition}
+            animate={{
+              opacity: [0, 0.55, 0],
+              filter: ["blur(4px)", "blur(14px)", "blur(14px)"],
+              scaleX: [0.85, 1, 1],
+            }}
+            transition={{
+              duration: ms(STAND_DURATION_MS) + ms(FILL_DURATION_MS),
+              delay: ms(STAND_DELAY_MS),
+              ease: EASE,
+              times: [0, 0.5, 1],
+            }}
           />
 
           {/* Phase 1 wireframe — fades out as Phase 3 fills in */}
           <motion.div
-            className="relative text-accent"
+            className="relative bg-transparent text-accent"
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
             transition={fillTransition}
@@ -211,18 +219,36 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
             />
           </motion.div>
 
-          {/* Phase 3 — filled / rendered website mockup (settles soft so hero copy stays legible) */}
+          {/* Phase 3 — glass mockup photo (1250ms / 350ms); no wrapper chrome */}
           <motion.div
-            className="absolute inset-0"
+            className="absolute inset-0 flex items-center justify-center bg-transparent"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.42 }}
+            animate={{ opacity: 1 }}
             transition={fillTransition}
           >
-            <FilledMockup />
+            <GlassMockupImage />
           </motion.div>
         </motion.div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Phase 3 payoff — pre-keyed RGBA glass mockup.
+ * No wrapper chrome; `unoptimized` preserves alpha through Next Image.
+ */
+function GlassMockupImage() {
+  return (
+    <Image
+      src="/glass-mockup-final.png"
+      alt=""
+      width={800}
+      height={450}
+      className="h-auto w-full max-w-[880px] bg-transparent object-contain"
+      priority
+      unoptimized
+    />
   );
 }
 
@@ -524,275 +550,6 @@ function WireframeSketch({
           {...fade(registrationDots)}
         />
       </g>
-    </svg>
-  );
-}
-
-/**
- * Filled browser mockup aligned to the wireframe viewBox geometry.
- * Kept as SVG so it shares the same 1000×700 plane as the outline.
- */
-function FilledMockup({ visible = false }: { visible?: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 1000 700"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={`h-auto w-full ${visible ? "opacity-100" : ""}`}
-    >
-      {/* Outer browser shell */}
-      <rect
-        x="150"
-        y="100"
-        width="700"
-        height="450"
-        fill={colors.cardBg}
-        stroke={colors.accent}
-        strokeOpacity="0.35"
-        strokeWidth="1.5"
-      />
-
-      {/* Chrome bar */}
-      <rect x="150" y="100" width="700" height="50" fill={colors.background} />
-      <line
-        x1="150"
-        y1="150"
-        x2="850"
-        y2="150"
-        stroke={colors.subtle}
-        strokeOpacity="0.35"
-        strokeWidth="1"
-      />
-
-      {/* Window controls */}
-      <circle cx="180" cy="125" r="4" fill={colors.subtle} opacity="0.7" />
-      <circle cx="200" cy="125" r="4" fill={colors.subtle} opacity="0.7" />
-      <circle cx="220" cy="125" r="4" fill={colors.subtle} opacity="0.7" />
-
-      {/* Favicon / logo mark slot — solid gold plate where construction lines were */}
-      <rect
-        x="242"
-        y="114"
-        width="28"
-        height="22"
-        fill={colors.accent}
-        opacity="0.85"
-      />
-      <path
-        d="M250 125 L256 119 L262 125 L256 131 Z"
-        fill={colors.background}
-        opacity="0.9"
-      />
-
-      {/* Address bar */}
-      <rect
-        x="290"
-        y="114"
-        width="420"
-        height="22"
-        fill={colors.cardBg}
-        opacity="0.9"
-      />
-      <rect
-        x="302"
-        y="122"
-        width="120"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.35"
-      />
-
-      {/* Content columns — rendered UI blocks */}
-      <rect
-        x="170"
-        y="170"
-        width="160"
-        height="160"
-        fill={colors.background}
-        opacity="0.85"
-      />
-      <rect
-        x="190"
-        y="190"
-        width="90"
-        height="8"
-        fill={colors.accent}
-        opacity="0.55"
-      />
-      <rect
-        x="190"
-        y="210"
-        width="120"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.35"
-      />
-      <rect
-        x="190"
-        y="226"
-        width="100"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.25"
-      />
-      <rect
-        x="190"
-        y="270"
-        width="70"
-        height="22"
-        fill={colors.accent}
-        opacity="0.7"
-      />
-
-      <rect
-        x="370"
-        y="170"
-        width="160"
-        height="160"
-        fill={colors.background}
-        opacity="0.85"
-      />
-      <rect
-        x="390"
-        y="190"
-        width="120"
-        height="70"
-        fill={colors.accent}
-        opacity="0.2"
-      />
-      <rect
-        x="390"
-        y="280"
-        width="100"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.35"
-      />
-      <rect
-        x="390"
-        y="296"
-        width="80"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.25"
-      />
-
-      <rect
-        x="570"
-        y="170"
-        width="160"
-        height="160"
-        fill={colors.background}
-        opacity="0.85"
-      />
-      <rect
-        x="590"
-        y="190"
-        width="50"
-        height="50"
-        fill={colors.accent}
-        opacity="0.45"
-      />
-      <rect
-        x="590"
-        y="256"
-        width="110"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.35"
-      />
-      <rect
-        x="590"
-        y="272"
-        width="90"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.25"
-      />
-      <rect
-        x="590"
-        y="288"
-        width="70"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.2"
-      />
-
-      {/* Lower content band */}
-      <rect
-        x="170"
-        y="370"
-        width="560"
-        height="140"
-        fill={colors.background}
-        opacity="0.75"
-      />
-      <rect
-        x="190"
-        y="395"
-        width="200"
-        height="10"
-        fill={colors.accent}
-        opacity="0.5"
-      />
-      <rect
-        x="190"
-        y="425"
-        width="480"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.3"
-      />
-      <rect
-        x="190"
-        y="445"
-        width="420"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.22"
-      />
-      <rect
-        x="190"
-        y="465"
-        width="360"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.18"
-      />
-
-      {/* Right rail accent */}
-      <rect
-        x="760"
-        y="170"
-        width="70"
-        height="340"
-        fill={colors.accent}
-        opacity="0.12"
-      />
-      <rect
-        x="772"
-        y="190"
-        width="46"
-        height="46"
-        fill={colors.accent}
-        opacity="0.35"
-      />
-      <rect
-        x="772"
-        y="255"
-        width="46"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.3"
-      />
-      <rect
-        x="772"
-        y="275"
-        width="46"
-        height="6"
-        fill={colors.subtle}
-        opacity="0.22"
-      />
     </svg>
   );
 }

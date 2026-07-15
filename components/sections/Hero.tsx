@@ -78,8 +78,7 @@ function Headline() {
 
 /**
  * Fulatelier hero — full-viewport navy plane.
- * Stack: hero-bg-final (z-0) → DraftingScene (z-[1]) → copy/CTA (z-10).
- * BlueprintGrid removed — linework is baked into the background image.
+ * Stack: atmospheric bg (z-0) → left compass blend (z-[1]) → DraftingScene (z-10) → copy (z-10).
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -97,7 +96,7 @@ export function Hero() {
       className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
-      {/* Furthest back — full-bleed photographic bg (includes left-edge blueprint linework) */}
+      {/* z-0 — full-bleed atmospheric base (blueprint left / glass corner shard right) */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -111,9 +110,28 @@ export function Hero() {
         />
       </div>
 
-      {/* DraftingScene sits in the empty center composed into the bg */}
+      {/* z-[1] — compass, left 42% only; linear mask dissolves before center */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
+        className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[42%] opacity-45 mix-blend-screen"
+        style={{
+          maskImage: "linear-gradient(to right, black 50%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, black 50%, transparent 100%)",
+        }}
+        aria-hidden="true"
+      >
+        <Image
+          src="/dark-atelier-wide-final.png"
+          alt=""
+          fill
+          className="object-cover object-left"
+          priority
+        />
+      </div>
+
+      {/* DraftingScene — center empty region of the atmospheric plate */}
+      <div
+        className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4"
         aria-hidden="true"
       >
         <DraftingScene className="mx-auto h-auto w-full max-w-[1000px]" />
