@@ -5,14 +5,12 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { LiveFeedPanel } from "@/components/ui/LiveFeedPanel";
 import { PostCard } from "@/components/ui/PostCard";
-import { ProjectLinkCard } from "@/components/ui/ProjectLinkCard";
 import { social } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const MAIN_FEED = [
   {
-    kind: "post" as const,
     platform: "linkedin" as const,
     author: "Gerald Anderson",
     role: "Founder, Fulatelier LLC",
@@ -23,19 +21,6 @@ const MAIN_FEED = [
     postUrl: social.linkedin,
   },
   {
-    kind: "project" as const,
-    status: "live" as const,
-    displayUrl: "for-living.it",
-    siteUrl: "https://www.for-living.it/",
-    projectType: "Reference · Premium Studio",
-    projectName: "For Living Milano",
-    description:
-      "Italian interior design studio — the editorial craft and precision we reference when building premium digital experiences.",
-    imageSrc:
-      "https://cdn.prod.website-files.com/696a99fdabc03596762256a7/69b2d8a4d4f29968faf5f80a_a33203f4efca1708d662d11231cef221_Share%20Image.jpg",
-  },
-  {
-    kind: "post" as const,
     platform: "facebook" as const,
     author: "Fulatelier LLC",
     date: "Jul 10, 2026",
@@ -43,27 +28,6 @@ const MAIN_FEED = [
       "Custom web development for Mississippi small businesses — starting at $500. No templates. No subscriptions. Built specifically for your business and your customers. Follow the page for weekly build updates.",
     // TODO: replace with the real individual Facebook post URL once available
     postUrl: social.facebook,
-  },
-];
-
-const REFERENCES = [
-  {
-    status: "live" as const,
-    displayUrl: "voxelo.ai",
-    siteUrl: "https://www.voxelo.ai/",
-    projectType: "Reference · Product Design",
-    projectName: "Voxelo",
-    description:
-      "3D and AI studio — clean product storytelling and motion-forward web design.",
-  },
-  {
-    status: "live" as const,
-    displayUrl: "outfit.hellohello.is",
-    siteUrl: "https://outfit.hellohello.is/",
-    projectType: "Reference · Awwwards SOTD",
-    projectName: "Outfit by ++hellohello",
-    description:
-      "Awwwards Site of the Day — interaction design and animation at the highest level.",
   },
 ];
 
@@ -181,7 +145,7 @@ function FadeUp({
 }
 
 /**
- * Build Log — Live Link cards to real posts and reference sites (no embeds).
+ * Build Log — Live Link cards to real social posts (no embeds).
  */
 export function BuildLog() {
   const reduceMotionPref = useReducedMotion();
@@ -203,70 +167,25 @@ export function BuildLog() {
 
         <LiveFeedPanel />
 
-        {/* Main feed */}
-        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-stretch gap-6 md:grid-cols-3">
+        {/* Social posts — LinkedIn + Facebook */}
+        <div className="mx-auto grid max-w-2xl grid-cols-1 items-stretch gap-6 md:grid-cols-2">
           {MAIN_FEED.map((item, index) => (
             <FadeUp
-              key={
-                item.kind === "post"
-                  ? `${item.platform}-${item.date}`
-                  : item.displayUrl
-              }
+              key={`${item.platform}-${item.date}`}
               active={inView}
               reduceMotion={reduceMotion}
               delay={index * 0.12}
             >
-              {item.kind === "post" ? (
-                <PostCard
-                  platform={item.platform}
-                  author={item.author}
-                  role={item.role}
-                  date={item.date}
-                  content={item.content}
-                  postUrl={item.postUrl}
-                />
-              ) : (
-                <ProjectLinkCard
-                  status={item.status}
-                  displayUrl={item.displayUrl}
-                  siteUrl={item.siteUrl}
-                  projectType={item.projectType}
-                  projectName={item.projectName}
-                  description={item.description}
-                  imageSrc={item.imageSrc}
-                />
-              )}
+              <PostCard
+                platform={item.platform}
+                author={item.author}
+                role={item.role}
+                date={item.date}
+                content={item.content}
+                postUrl={item.postUrl}
+              />
             </FadeUp>
           ))}
-        </div>
-
-        {/* References row — for-living.it already in main feed above */}
-        <div className="mx-auto mt-12 max-w-[1100px]">
-          <p className="mb-6 text-center font-inter text-sm italic text-subtle">
-            The craft we reference. The standard we build toward.
-          </p>
-          <p className="mb-6 mt-12 text-center font-mono text-[9px] tracking-[0.2em] text-accent/50">
-            FUL://REFERENCES — Sites we study
-          </p>
-          <div className="mx-auto grid max-w-[720px] grid-cols-1 gap-6 md:grid-cols-2">
-            {REFERENCES.map((ref, index) => (
-              <FadeUp
-                key={ref.displayUrl}
-                active={inView}
-                reduceMotion={reduceMotion}
-                delay={0.36 + index * 0.12}
-              >
-                <ProjectLinkCard
-                  status={ref.status}
-                  displayUrl={ref.displayUrl}
-                  siteUrl={ref.siteUrl}
-                  projectType={ref.projectType}
-                  projectName={ref.projectName}
-                  description={ref.description}
-                />
-              </FadeUp>
-            ))}
-          </div>
         </div>
 
         <div className="mt-14 text-center">
