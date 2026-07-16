@@ -8,14 +8,14 @@ import { Button } from "@/components/ui/Button";
 import { LogoMark } from "@/components/ui/LogoMark";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+/** Back-out / overshoot — logo "clicks into place" as the mockup fills in */
 const RESOLVE_EASE = [0.34, 1.56, 0.64, 1] as const;
+
+/** Sync with DraftingScene Phase 3 fill-in (1250ms) */
 const LOGO_RESOLVE_DELAY = 1.25;
 
 const HEADLINE_LINES = ["Precision Built.", "Purpose Driven."] as const;
 const HEADLINE_DELAY = 1.7;
-
-const MOCKUP_MASK =
-  "radial-gradient(ellipse 85% 80% at 55% 50%, black 35%, transparent 100%)";
 
 function RevealedWord({
   word,
@@ -42,17 +42,14 @@ function RevealedWord({
   );
 }
 
-function Headline({ alignLeft }: { alignLeft?: boolean }) {
+function Headline() {
   const reduceMotion = useReducedMotion();
   let wordIndex = 0;
 
   return (
     <h1
       id="hero-heading"
-      className={[
-        "max-w-[18ch] font-cormorant text-[56px] font-bold leading-[0.95] tracking-[-0.02em] text-accent-light md:text-[104px]",
-        alignLeft ? "text-left" : "text-center",
-      ].join(" ")}
+      className="max-w-[18ch] font-cormorant text-[56px] font-bold leading-[0.95] tracking-[-0.02em] text-accent-light md:text-[104px]"
       style={{
         textShadow:
           "0 0 8px rgba(10, 22, 40, 1), 0 2px 40px rgba(10, 22, 40, 1), 0 4px 80px rgba(10, 22, 40, 0.95)",
@@ -84,7 +81,9 @@ function Headline({ alignLeft }: { alignLeft?: boolean }) {
 }
 
 /**
- * Fulatelier hero — two-column desktop (copy left / glass mockup right).
+ * Fulatelier hero — full-viewport navy plane.
+ * Stack: atmospheric bg (z-0) → left compass blend (z-[1]) → DraftingScene (z-10) → copy (z-10).
+ * Glass mockup is ~20% larger and shifted left-of-center on desktop only.
  */
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -97,9 +96,10 @@ export function Hero() {
 
   return (
     <section
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-background"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background"
       aria-labelledby="hero-heading"
     >
+      {/* z-0 — full-bleed atmospheric base */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
@@ -113,6 +113,7 @@ export function Hero() {
         />
       </div>
 
+      {/* z-[1] — compass, left 42% only; linear mask dissolves before center */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[42%] opacity-45 mix-blend-screen"
         style={{
@@ -131,81 +132,53 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile md:flex-row md:items-center md:gap-10 md:px-8 lg:py-section-desktop xl:gap-14">
-        {/* LEFT — copy (55%) */}
-        <div className="flex w-full flex-col items-center text-center md:w-[55%] md:items-start md:text-left">
-          <motion.div
-            className="mb-5 origin-center md:mb-6"
-            initial={
-              reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.7 }
-            }
-            animate={
-              reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }
-            }
-            transition={{
-              duration: 0.3,
-              delay: LOGO_RESOLVE_DELAY,
-              ease: reduceMotion ? EASE : RESOLVE_EASE,
-            }}
-          >
-            <LogoMark className="h-20 w-20 md:h-28 md:w-28" />
-          </motion.div>
-
-          <motion.p
-            className="mb-4 font-mono text-[10px] tracking-[0.2em] text-accent/65"
-            {...fadeUp(1.5)}
-          >
-            FUL://ATELIER
-          </motion.p>
-
-          <Headline alignLeft />
-
-          <motion.p
-            className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle"
-            {...fadeUp(2.0)}
-          >
-            Custom websites and web applications built to perform — not just to
-            exist.
-          </motion.p>
-
-          <motion.div
-            className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8 md:items-start"
-            {...fadeUp(2.2)}
-          >
-            <Button href="#contact" variant="solid">
-              Start Your Project
-            </Button>
-            <ArrowLink href="#work">View Our Work</ArrowLink>
-          </motion.div>
+      {/* DraftingScene — centered stack; larger + left-shifted on md+ */}
+      <div
+        className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-4"
+        aria-hidden="true"
+      >
+        <div className="w-full max-w-[1000px] origin-center scale-[1.2] md:-translate-x-[10%]">
+          <DraftingScene className="mx-auto h-auto w-full" />
         </div>
+      </div>
 
-        {/* RIGHT — glass mockup (45%) */}
-        <div className="mt-12 flex w-full justify-center md:mt-0 md:w-[45%] md:justify-end">
-          <motion.div
-            className="relative w-full max-w-[280px] opacity-70 md:max-w-[480px] md:opacity-100"
-            style={{
-              maskImage: MOCKUP_MASK,
-              WebkitMaskImage: MOCKUP_MASK,
-            }}
-            aria-hidden="true"
-            animate={
-              reduceMotion
-                ? undefined
-                : { y: [0, -8, 0] }
-            }
-            transition={
-              reduceMotion
-                ? undefined
-                : {
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }
-            }
-          >
-            <DraftingScene className="mx-auto h-auto w-full bg-transparent" />
-          </motion.div>
-        </div>
+      <div className="relative z-10 mx-auto flex w-full max-w-content flex-col items-center px-6 py-section-mobile text-center lg:px-8 lg:py-section-desktop">
+        <motion.div
+          className="mb-6 origin-center"
+          initial={
+            reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.7 }
+          }
+          animate={
+            reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }
+          }
+          transition={{
+            duration: 0.3,
+            delay: LOGO_RESOLVE_DELAY,
+            ease: reduceMotion ? EASE : RESOLVE_EASE,
+          }}
+        >
+          <LogoMark className="h-28 w-28 md:h-40 md:w-40" />
+        </motion.div>
+
+        <Headline />
+
+        <motion.p
+          className="mt-6 max-w-[480px] font-inter text-lg font-normal leading-relaxed text-subtle"
+          {...fadeUp(2.0)}
+        >
+          Custom websites and web applications built to perform — not just to
+          exist.
+        </motion.p>
+
+        <motion.div
+          className="mt-10 flex flex-col items-center gap-5 sm:flex-row sm:gap-8"
+          {...fadeUp(2.2)}
+        >
+          <Button href="#contact" variant="solid">
+            Start Your Project
+          </Button>
+          <ArrowLink href="#work">View Our Work</ArrowLink>
+        </motion.div>
       </div>
 
       <motion.div
