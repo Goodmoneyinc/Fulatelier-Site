@@ -31,6 +31,8 @@ const MAIN_FEED = [
     projectName: "For Living Milano",
     description:
       "Italian interior design studio — the editorial craft and precision we reference when building premium digital experiences.",
+    imageSrc:
+      "https://cdn.prod.website-files.com/696a99fdabc03596762256a7/69b2d8a4d4f29968faf5f80a_a33203f4efca1708d662d11231cef221_Share%20Image.jpg",
   },
   {
     kind: "post" as const,
@@ -202,7 +204,7 @@ export function BuildLog() {
         <LiveFeedPanel />
 
         {/* Main feed */}
-        <div className="mx-auto grid max-w-[1100px] grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-stretch gap-6 md:grid-cols-3">
           {MAIN_FEED.map((item, index) => (
             <FadeUp
               key={
@@ -231,6 +233,7 @@ export function BuildLog() {
                   projectType={item.projectType}
                   projectName={item.projectName}
                   description={item.description}
+                  imageSrc={item.imageSrc}
                 />
               )}
             </FadeUp>
