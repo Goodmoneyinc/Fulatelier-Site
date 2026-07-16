@@ -49,7 +49,7 @@ function Headline() {
   return (
     <h1
       id="hero-heading"
-      className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-text [text-shadow:0_0_6px_rgba(10,22,40,0.95),0_0_14px_rgba(10,22,40,0.85),0_0_26px_rgba(10,22,40,0.7),0_0_40px_rgba(10,22,40,0.5)] lg:text-h1-desktop"
+      className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-accent-light [text-shadow:0_0_6px_rgba(10,22,40,0.95),0_0_14px_rgba(10,22,40,0.85),0_0_26px_rgba(10,22,40,0.7),0_0_40px_rgba(10,22,40,0.5)] lg:text-h1-desktop"
     >
       {HEADLINE_LINES.map((line) => {
         const words = line.split(" ");
