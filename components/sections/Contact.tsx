@@ -48,7 +48,7 @@ function SectionHeader({
 
         <motion.h2
           id="contact-heading"
-          className="mb-6 font-playfair text-h1 font-bold leading-none tracking-[-0.02em] text-text md:text-h1-desktop"
+          className="mb-6 font-cormorant text-[64px] font-bold leading-[0.9] tracking-[-0.03em] text-text md:text-[120px]"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
           transition={{

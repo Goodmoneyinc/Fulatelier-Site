@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Inter, Playfair_Display } from "next/font/google";
+import { Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
 import { IntroReveal } from "@/components/intro/IntroReveal";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import "@/styles/globals.css";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-cormorant",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 const inter = Inter({
@@ -47,16 +48,27 @@ export const metadata: Metadata = {
   authors: [{ name: "Fulatelier LLC" }],
   creator: "Fulatelier LLC",
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    siteName: siteTitle,
     title: siteTitle,
     description: siteDescription,
+    url: "https://fulatelier-site.vercel.app",
+    siteName: "Fulatelier LLC",
+    images: [
+      {
+        url: "https://fulatelier-site.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Fulatelier LLC — Precision Crafted. Purpose Built.",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
-    description: siteDescription,
+    description:
+      "Boutique web development studio — custom websites and SaaS, precision crafted.",
+    images: ["https://fulatelier-site.vercel.app/og-image.png"],
   },
   robots: {
     index: true,
@@ -72,7 +84,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${ibmPlexMono.variable}`}
+      className={`${cormorant.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-background font-inter text-text antialiased">
         <IntroReveal />

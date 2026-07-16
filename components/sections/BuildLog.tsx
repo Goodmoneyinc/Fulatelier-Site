@@ -73,7 +73,7 @@ function SectionHeader({
 
         <motion.h2
           id="build-log-heading"
-          className="font-playfair text-[36px] font-bold leading-[1.1] tracking-[-0.015em] text-text md:text-[52px]"
+          className="font-cormorant text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-text md:text-[64px]"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
           transition={{

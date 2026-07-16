@@ -27,7 +27,7 @@ const config: Config = {
         footer: colors.footerBg,
       },
       fontFamily: {
-        playfair: [typography.display, "Georgia", "serif"],
+        cormorant: [typography.display, "Georgia", "serif"],
         inter: [typography.body, "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
@@ -51,12 +51,16 @@ const config: Config = {
         h2: [
           typography.h2.mobile,
           {
+            lineHeight: typography.h2.lineHeight,
+            letterSpacing: typography.h2.tracking,
             fontWeight: typography.h2.weight,
           },
         ],
         "h2-desktop": [
           typography.h2.desktop,
           {
+            lineHeight: typography.h2.lineHeight,
+            letterSpacing: typography.h2.tracking,
             fontWeight: typography.h2.weight,
           },
         ],

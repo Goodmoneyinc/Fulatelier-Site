@@ -68,12 +68,12 @@ export function Work() {
     >
       <div className="container-fulatelier">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-inter text-[11px] font-semibold uppercase tracking-[0.3em] text-accent">
-            The Work
+          <p className="mb-5 block font-mono text-[10px] uppercase tracking-[0.2em] text-accent opacity-65">
+            FUL://WORK
           </p>
           <h2
             id="work-heading"
-            className="mt-4 font-playfair text-h2 font-bold tracking-[-0.015em] text-text lg:text-h2-desktop"
+            className="font-cormorant text-h2 font-semibold tracking-[-0.02em] text-text md:text-h2-desktop"
           >
             Built to Perform.
           </h2>

@@ -95,7 +95,7 @@ function StatColumn({
       </p>
 
       <p
-        className="font-playfair text-[32px] font-bold leading-none tracking-[-0.02em] text-accent-light md:text-[44px]"
+        className="font-cormorant text-[32px] font-bold leading-none tracking-[-0.02em] text-accent-light md:text-[44px]"
         aria-label={column.value}
       >
         {active ? (

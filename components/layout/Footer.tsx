@@ -22,10 +22,10 @@ export function Footer() {
           {/* LEFT — brand (mobile order 2) */}
           <div className="order-2 border-b border-accent/30 pb-10 md:order-1 md:border-b-0 md:pb-0">
             <LogoMark className="mb-4 h-9 w-9" />
-            <p className="mb-2 font-inter text-[11px] font-semibold uppercase tracking-[0.25em] text-text">
+            <p className="mb-2 font-cormorant text-[15px] font-semibold uppercase tracking-[0.25em] text-text">
               FULATELIER LLC
             </p>
-            <p className="mb-6 font-inter text-[13px] italic text-subtle">
+            <p className="mb-6 font-cormorant text-base font-normal italic tracking-[0.02em] text-subtle">
               Precision Crafted. Purpose Built.
             </p>
             <div
@@ -71,12 +71,12 @@ export function Footer() {
               href="#contact"
               className="group inline-block transition-colors duration-200 ease-out hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
             >
-              <span className="mb-2 block font-playfair text-[22px] font-bold text-text transition-colors duration-200 ease-out group-hover:text-accent-light">
+              <span className="mb-2 block font-cormorant text-[22px] font-bold text-text transition-colors duration-200 ease-out group-hover:text-accent-light">
                 START YOUR PROJECT
               </span>
               <motion.span
                 aria-hidden="true"
-                className="mb-6 block font-playfair text-[22px] text-accent transition-transform duration-200 ease-out group-hover:translate-x-1.5"
+                className="mb-6 block font-cormorant text-[22px] text-accent transition-transform duration-200 ease-out group-hover:translate-x-1.5"
                 animate={
                   reduceMotion ? { opacity: 1 } : { opacity: [1, 0.4, 1] }
                 }
