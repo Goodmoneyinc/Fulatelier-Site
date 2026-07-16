@@ -50,6 +50,10 @@ function Headline() {
     <h1
       id="hero-heading"
       className="max-w-[18ch] font-playfair text-h1 font-bold leading-[1.1] tracking-[-0.02em] text-text lg:text-h1-desktop"
+      style={{
+        WebkitTextStroke: "1.5px #0A1628",
+        paintOrder: "stroke fill",
+      }}
     >
       {HEADLINE_LINES.map((line) => {
         const words = line.split(" ");
