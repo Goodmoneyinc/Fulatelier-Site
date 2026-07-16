@@ -152,7 +152,7 @@ export function Work() {
         >
           More work in progress — follow{" "}
           <a
-            href={social.buildLog}
+            href={social.facebook}
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-accent underline decoration-accent underline-offset-4 transition-colors duration-200 hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
