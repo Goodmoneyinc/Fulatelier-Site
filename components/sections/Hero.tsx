@@ -182,7 +182,7 @@ export function Hero() {
         {/* RIGHT — glass mockup (45%) */}
         <div className="mt-12 flex w-full justify-center md:mt-0 md:w-[45%] md:justify-end">
           <motion.div
-            className="relative w-full max-w-[425px] opacity-70 md:max-w-[730px] md:opacity-100"
+            className="relative w-full max-w-[320px] opacity-70 md:max-w-[550px] md:opacity-100"
             style={{
               maskImage: MOCKUP_MASK,
               WebkitMaskImage: MOCKUP_MASK,

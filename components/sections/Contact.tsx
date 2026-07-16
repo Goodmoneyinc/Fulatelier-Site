@@ -159,9 +159,11 @@ function SpecRow({
 function CommissionPanel({
   active,
   reduceMotion,
+  children,
 }: {
   active: boolean;
   reduceMotion: boolean;
+  children: ReactNode;
 }) {
   const [showBorder, setShowBorder] = useState(reduceMotion);
   const [reveal, setReveal] = useState(reduceMotion);
@@ -251,6 +253,10 @@ function CommissionPanel({
           </a>{" "}
           directly.
         </p>
+
+        <div className="my-6 h-px w-full bg-accent/40" aria-hidden="true" />
+
+        {children}
       </motion.div>
     </div>
   );
@@ -324,11 +330,7 @@ function SelectField({
 
 function SuccessPanel() {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="mx-auto mt-8 max-w-[600px] border border-accent bg-footer px-8 py-12 text-center"
-    >
+    <div role="status" aria-live="polite" className="py-4 text-center">
       <svg
         width="32"
         height="32"
@@ -437,7 +439,7 @@ function ProjectBriefForm() {
   if (success) return <SuccessPanel />;
 
   return (
-    <div className="mx-auto mt-8 max-w-[600px] border border-accent/50 bg-footer p-7 md:p-10">
+    <div>
       <p className="mb-5 font-mono text-[10px] tracking-[0.2em] text-accent opacity-65">
         FUL://PROJECT-BRIEF
       </p>
@@ -656,7 +658,7 @@ function ProjectBriefForm() {
 }
 
 /**
- * Contact — commission panel + project brief form.
+ * Contact — single commission panel with embedded project brief form.
  */
 export function Contact() {
   const reduceMotionPref = useReducedMotion();
@@ -676,9 +678,9 @@ export function Contact() {
       <div className="relative mx-auto max-w-[720px] px-6 lg:px-8">
         <SectionHeader active={inView} reduceMotion={reduceMotion} />
 
-        <CommissionPanel active={inView} reduceMotion={reduceMotion} />
-
-        <ProjectBriefForm />
+        <CommissionPanel active={inView} reduceMotion={reduceMotion}>
+          <ProjectBriefForm />
+        </CommissionPanel>
 
         <div className="mt-8 text-center">
           <p className="mb-3 font-inter text-sm text-subtle">

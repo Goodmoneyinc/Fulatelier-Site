@@ -50,7 +50,7 @@ export function PostCard({
       className="group flex h-full flex-col overflow-hidden border border-accent/40 bg-card transition-colors duration-150 hover:border-accent/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       {/* Top bar */}
-      <div className="flex h-9 items-center justify-between gap-3 border-b border-accent/20 bg-footer px-4">
+      <div className="flex h-9 shrink-0 items-center justify-between gap-3 border-b border-accent/20 bg-footer px-4">
         <div className="flex min-w-0 items-center gap-2">
           <span
             className="flex h-[18px] w-[18px] shrink-0 items-center justify-center font-inter text-[10px] font-bold text-text"
@@ -68,13 +68,28 @@ export function PostCard({
         </time>
       </div>
 
-      {/* Body */}
+      {/* Media band — matches ProjectLinkCard image height for equal row cards */}
+      <div
+        className="relative flex h-[180px] shrink-0 items-center justify-center border-b border-accent/20 bg-background"
+        aria-hidden="true"
+      >
+        <span
+          className="flex h-14 w-14 items-center justify-center font-inter text-xl font-bold text-text"
+          style={{ backgroundColor: meta.badgeBg, borderRadius: "3px" }}
+        >
+          {meta.badgeLabel}
+        </span>
+      </div>
+
+      {/* Body — consistent text block height */}
       <div className="flex flex-1 flex-col px-5 py-5">
-        <p className="font-inter text-xs font-semibold text-text">{author}</p>
-        {role ? (
-          <p className="mt-0.5 font-inter text-[11px] text-subtle">{role}</p>
-        ) : null}
-        <p className="mt-4 line-clamp-4 font-inter text-sm leading-[1.6] text-[#E0D8CE]">
+        <div className="min-h-[2.75rem]">
+          <p className="font-inter text-xs font-semibold text-text">{author}</p>
+          {role ? (
+            <p className="mt-0.5 font-inter text-[11px] text-subtle">{role}</p>
+          ) : null}
+        </div>
+        <p className="mt-4 min-h-[5.6rem] line-clamp-4 font-inter text-sm leading-[1.6] text-[#E0D8CE]">
           {content}
         </p>
       </div>
