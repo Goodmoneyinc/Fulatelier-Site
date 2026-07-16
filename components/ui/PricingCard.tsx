@@ -326,7 +326,7 @@ export function PricingCard({
         </motion.p>
 
         <motion.h3
-          className="mt-3 font-playfair text-2xl font-semibold tracking-[-0.01em] text-text"
+          className="mt-3 font-cormorant text-[32px] font-semibold tracking-[-0.01em] text-text"
           initial={
             reduceMotion ? { opacity: 0 } : { opacity: 0.6, y: 6 }
           }
@@ -387,7 +387,7 @@ export function PricingCard({
           </motion.p>
           <div className="relative mt-2 overflow-hidden">
             <motion.p
-              className="font-playfair text-[36px] font-bold leading-none tracking-[-0.02em] text-accent"
+              className="font-cormorant text-[30px] font-bold leading-none tracking-[-0.02em] text-accent-light md:text-[44px]"
               initial={
                 reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }
               }

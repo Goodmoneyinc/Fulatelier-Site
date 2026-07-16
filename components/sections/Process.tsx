@@ -139,7 +139,7 @@ function SectionHeader({
 
         <motion.h2
           id="process-heading"
-          className="font-playfair text-[36px] font-bold leading-[1.1] tracking-[-0.015em] text-text md:text-[56px]"
+          className="font-cormorant text-[40px] font-semibold leading-[1.05] tracking-[-0.02em] text-text md:text-[64px]"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
           transition={{
@@ -308,18 +308,16 @@ export function Process() {
                           }}
                         >
                           <span
-                            className="block font-playfair text-[64px] font-bold leading-none text-accent transition-opacity duration-200 ease-out md:text-[96px] max-md:opacity-[0.08] md:opacity-10"
+                            className="block font-cormorant text-[96px] font-bold leading-none tracking-[-0.05em] text-accent opacity-[0.06] transition-opacity duration-200 ease-out md:text-[160px]"
                             style={{
-                              opacity: hovered
-                                ? 0.18
-                                : undefined,
+                              opacity: hovered ? 0.18 : 0.06,
                             }}
                           >
                             {step.digit}
                           </span>
                         </motion.div>
 
-                        <h3 className="relative z-[1] -mt-10 mb-4 font-playfair text-[18px] font-bold leading-tight text-text md:-mt-14 md:text-[22px]">
+                        <h3 className="relative z-[1] -mt-12 mb-4 font-cormorant text-[28px] font-semibold leading-tight tracking-[-0.01em] text-text md:-mt-16">
                           {step.title}
                         </h3>
                       </div>

@@ -177,7 +177,7 @@ export function DraftingScene({ className = "" }: DraftingSceneProps) {
         >
           {/* Soft lift shadow — clears as the glass photo resolves (no hard box under it) */}
           <motion.div
-            className="pointer-events-none absolute left-[12%] right-[12%] top-[78%] h-[8%] rounded-[100%]"
+            className="pointer-events-none absolute left-[12%] right-[12%] top-[78%] h-[8%]"
             style={{
               background:
                 "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%)",

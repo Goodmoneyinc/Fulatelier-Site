@@ -136,8 +136,8 @@ export function Nav() {
           "pointer-events-auto mx-auto flex h-16 w-full max-w-3xl items-center justify-between gap-6 border border-accent/20 px-6 backdrop-blur-md lg:h-20 lg:px-8",
           "rounded-none transition-[background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
           scrolled
-            ? `bg-card/95 ${SHADOW_SCROLLED}`
-            : `bg-card/85 ${SHADOW_REST}`,
+            ? `bg-background/95 ${SHADOW_SCROLLED}`
+            : `bg-background/85 ${SHADOW_REST}`,
         ].join(" ")}
         aria-label="Primary"
       >
@@ -146,7 +146,7 @@ export function Nav() {
           className="group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <LogoMark className="h-14 w-14 shrink-0" />
-          <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
+          <span className="font-cormorant text-[15px] font-semibold uppercase tracking-[0.25em] text-text">
             FULATELIER
           </span>
         </a>
@@ -218,7 +218,7 @@ export function Nav() {
                 onClick={closeMenu}
               >
                 <LogoMark className="h-14 w-14 shrink-0" />
-                <span className="font-inter text-sm font-semibold uppercase tracking-[0.2em] text-text">
+                <span className="font-cormorant text-[15px] font-semibold uppercase tracking-[0.25em] text-text">
                   FULATELIER
                 </span>
               </a>
@@ -242,7 +242,7 @@ export function Nav() {
                   <motion.a
                     href={link.href}
                     onClick={closeMenu}
-                    className="font-playfair text-h1 text-text transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    className="font-cormorant text-h1 text-text transition-colors duration-300 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     initial={
                       reduceMotion
                         ? { opacity: 0 }

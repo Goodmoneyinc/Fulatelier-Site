@@ -165,7 +165,7 @@ export function IntroReveal() {
         </motion.div>
 
         <p
-          className="mt-6 font-playfair text-[20px] font-semibold tracking-[0.35em] text-text md:text-[28px]"
+          className="mt-6 font-cormorant text-[20px] font-semibold tracking-[0.35em] text-text md:text-[28px]"
           aria-label="Fulatelier"
         >
           {WORDMARK.split("").map((char, i) => (

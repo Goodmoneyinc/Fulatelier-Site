@@ -35,23 +35,25 @@ export const colors = {
 
 export const typography = {
   /**
-   * Playfair Display — ONLY for headlines, prices, large numbers,
+   * Cormorant Garamond — ONLY for headlines, prices, large numbers,
    * tier names. NEVER body copy.
    */
-  display: "var(--font-playfair)",
+  display: "var(--font-cormorant)",
   /** Inter — everything else */
   body: "var(--font-inter)",
   h1: {
-    mobile: "48px",
-    desktop: "88px",
+    mobile: "56px",
+    desktop: "104px",
     weight: "700",
     tracking: "-0.02em",
-    lineHeight: "1.1",
+    lineHeight: "0.95",
   },
   h2: {
-    mobile: "32px",
-    desktop: "56px",
-    weight: "700",
+    mobile: "40px",
+    desktop: "64px",
+    weight: "600",
+    tracking: "-0.02em",
+    lineHeight: "1.05",
   },
 } as const;
 

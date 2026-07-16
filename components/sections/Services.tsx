@@ -96,7 +96,7 @@ function SectionHeader({
 
         <motion.h2
           id="services-heading"
-          className="font-playfair text-h2 font-bold tracking-[-0.015em] text-text lg:text-h2-desktop"
+          className="font-cormorant text-h2 font-semibold tracking-[-0.02em] text-text md:text-h2-desktop"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
           transition={{

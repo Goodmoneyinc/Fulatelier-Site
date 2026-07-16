@@ -54,7 +54,10 @@ export function LiveFeedPanel() {
       {/* LinkedIn row */}
       <div className="flex h-[52px] items-center justify-between gap-3 border-b border-accent/20 px-5">
         <div className="flex min-w-0 items-center gap-2.5">
-          <span className="shrink-0 text-text">
+          <span
+            className="flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden text-text"
+            style={{ borderRadius: "3px" }}
+          >
             <LinkedInMark />
           </span>
           <LiveDot />
@@ -70,7 +73,10 @@ export function LiveFeedPanel() {
       {/* Facebook row */}
       <div className="flex h-[52px] items-center justify-between gap-3 px-5">
         <div className="flex min-w-0 items-center gap-2.5">
-          <span className="shrink-0 text-text">
+          <span
+            className="flex h-4 w-4 shrink-0 items-center justify-center overflow-hidden text-text"
+            style={{ borderRadius: "3px" }}
+          >
             <FacebookMark />
           </span>
           <LiveDot />

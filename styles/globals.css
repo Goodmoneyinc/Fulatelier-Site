@@ -20,10 +20,10 @@
   --section-padding-desktop: 120px;
   --content-max-width: 1200px;
 
-  --type-h1-mobile: 48px;
-  --type-h1-desktop: 88px;
-  --type-h2-mobile: 32px;
-  --type-h2-desktop: 56px;
+  --type-h1-mobile: 56px;
+  --type-h1-desktop: 104px;
+  --type-h2-mobile: 40px;
+  --type-h2-desktop: 64px;
 
   --radius: 0px;
   --ease-signature: cubic-bezier(0.16, 1, 0.3, 1);
@@ -74,20 +74,27 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-playfair), Georgia, "Times New Roman", serif;
+    font-family: var(--font-cormorant), Georgia, "Times New Roman", serif;
     color: var(--color-text);
-    font-weight: 700;
   }
 
   h1 {
     font-size: var(--type-h1-mobile);
+    font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.1;
+    line-height: 0.95;
   }
 
   h2 {
     font-size: var(--type-h2-mobile);
-    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  h3,
+  h4 {
+    font-weight: 600;
   }
 
   @media (min-width: 1024px) {

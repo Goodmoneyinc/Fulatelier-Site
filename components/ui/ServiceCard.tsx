@@ -254,7 +254,7 @@ export function ServiceCard({
         </motion.div>
 
         <motion.h3
-          className="font-playfair text-[28px] font-semibold leading-tight tracking-[-0.01em] text-text"
+          className="font-cormorant text-[26px] font-semibold leading-tight tracking-[-0.01em] text-text"
           initial={
             reduceMotion ? { opacity: 0 } : { opacity: 0.6, y: 6 }
           }
@@ -328,7 +328,7 @@ export function ServiceCard({
             aria-hidden="true"
           />
           <motion.p
-            className="relative font-playfair text-[32px] font-bold leading-none tracking-[-0.02em] text-accent"
+            className="relative font-cormorant text-[30px] font-bold leading-none tracking-[-0.02em] text-accent-light md:text-[32px]"
             initial={{ opacity: 0 }}
             animate={{
               opacity: investPrice || (reduceMotion && active) ? 1 : 0,

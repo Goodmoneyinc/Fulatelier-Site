@@ -24,7 +24,7 @@ const TIERS = [
   {
     name: "The Launchpad",
     systemLabel: "FUL://01",
-    price: "$500–$800",
+    price: "$500—$800",
     subtitle: "A focused marketing site that looks intentional and ships fast.",
     delivery: "Delivered in 5–10 days",
     ctaLabel: "Start with Launchpad",
@@ -39,7 +39,7 @@ const TIERS = [
   {
     name: "The Authority",
     systemLabel: "FUL://02",
-    price: "$900–$1,500",
+    price: "$900—$1,500",
     subtitle: "A brand-forward site with room to grow content and leads.",
     delivery: "Delivered in 10–18 days",
     ctaLabel: "Build Authority",
@@ -55,7 +55,7 @@ const TIERS = [
   {
     name: "The Empire",
     systemLabel: "FUL://03",
-    price: "$1,600–$2,500",
+    price: "$1,600—$2,500",
     subtitle: "A high-craft presence with integrations and motion polish.",
     delivery: "Delivered in 18–30 days",
     ctaLabel: "Commission Empire",
@@ -109,7 +109,7 @@ function SectionHeader({
 
         <motion.h2
           id="pricing-heading"
-          className="font-playfair text-h2 font-bold tracking-[-0.015em] text-text lg:text-h2-desktop"
+          className="font-cormorant text-h2 font-semibold tracking-[-0.02em] text-text md:text-h2-desktop"
           initial={{ opacity: 0 }}
           animate={active ? { opacity: 1 } : { opacity: 0 }}
           transition={{

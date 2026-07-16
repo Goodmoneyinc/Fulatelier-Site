@@ -11,7 +11,7 @@ export type ProjectCardProps = {
 };
 
 /**
- * Portfolio project card — BrowserFrame with Playfair initial placeholder,
+ * Portfolio project card — BrowserFrame with Cormorant initial placeholder,
  * overlapping pill type-badge, gold hover overlay, and meta below the frame.
  */
 export function ProjectCard({
@@ -41,7 +41,7 @@ export function ProjectCard({
             <span
               aria-hidden="true"
               className={[
-                "select-none font-playfair font-bold leading-none text-text opacity-[0.08]",
+                "select-none font-cormorant font-bold leading-none text-text opacity-[0.08]",
                 featured
                   ? "text-[clamp(8rem,22vw,14rem)]"
                   : "text-[clamp(6rem,18vw,10rem)]",
@@ -68,21 +68,13 @@ export function ProjectCard({
           </p>
         </BrowserFrame>
 
-        {/*
-          Pill badge — intentional rounded-full exception to the site-wide
-          sharp-corner rule: reads as a physical tag straddling the frame edge.
-          Inline borderRadius required because theme maps rounded-full → 0.
-        */}
-        <span
-          className="absolute bottom-0 left-4 z-10 -translate-y-1/2 border border-accent bg-card px-3 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.2em] text-text"
-          style={{ borderRadius: "9999px" }}
-        >
+        <span className="absolute bottom-0 left-4 z-10 -translate-y-1/2 border border-accent bg-card px-3 py-1 font-inter text-[10px] font-semibold uppercase tracking-[0.2em] text-text">
           {badge}
         </span>
       </div>
 
       <div className="mt-8">
-        <h3 className="font-playfair text-[22px] font-semibold leading-snug tracking-[-0.01em] text-text transition-colors duration-200 ease-out group-hover:text-accent group-focus-visible:text-accent">
+        <h3 className="font-cormorant text-[26px] font-semibold leading-snug tracking-[-0.01em] text-text transition-colors duration-200 ease-out group-hover:text-accent group-focus-visible:text-accent">
           {title}
         </h3>
         <p className="mt-2 line-clamp-2 font-inter text-sm leading-relaxed text-subtle">
