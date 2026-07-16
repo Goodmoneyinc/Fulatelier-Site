@@ -29,6 +29,7 @@ const config: Config = {
       fontFamily: {
         playfair: [typography.display, "Georgia", "serif"],
         inter: [typography.body, "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
         h1: [
