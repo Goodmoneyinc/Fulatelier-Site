@@ -7,6 +7,16 @@ const nextConfig = {
         hostname: "cdn.prod.website-files.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.voxelo.ai",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "outfit.hellohello.is",
+        pathname: "/**",
+      },
     ],
   },
 };
