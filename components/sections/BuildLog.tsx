@@ -21,19 +21,6 @@ const MAIN_FEED = [
     postUrl: social.linkedin,
   },
   {
-    kind: "project" as const,
-    status: "live" as const,
-    displayUrl: "for-living.it",
-    siteUrl: "https://www.for-living.it/",
-    projectType: "Reference · Premium Studio",
-    projectName: "For Living Milano",
-    description:
-      "Italian interior design studio — the editorial craft and precision we reference when building premium digital experiences.",
-    imageSrc:
-      "https://cdn.prod.website-files.com/696a99fdabc03596762256a7/69b2d8a4d4f29968faf5f80a_a33203f4efca1708d662d11231cef221_Share%20Image.jpg",
-  },
-  {
-    kind: "post" as const,
     platform: "facebook" as const,
     author: "Fulatelier LLC",
     date: "Jul 10, 2026",
@@ -180,8 +167,8 @@ export function BuildLog() {
 
         <LiveFeedPanel />
 
-        {/* Main feed */}
-        <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-stretch gap-6 md:grid-cols-3">
+        {/* Social posts — LinkedIn + Facebook */}
+        <div className="mx-auto grid max-w-2xl grid-cols-1 items-stretch gap-6 md:grid-cols-2">
           {MAIN_FEED.map((item, index) => (
             <FadeUp
               key={`${item.platform}-${item.date}`}
@@ -189,26 +176,14 @@ export function BuildLog() {
               reduceMotion={reduceMotion}
               delay={index * 0.12}
             >
-              {item.kind === "post" ? (
-                <PostCard
-                  platform={item.platform}
-                  author={item.author}
-                  role={item.role}
-                  date={item.date}
-                  content={item.content}
-                  postUrl={item.postUrl}
-                />
-              ) : (
-                <ProjectLinkCard
-                  status={item.status}
-                  displayUrl={item.displayUrl}
-                  siteUrl={item.siteUrl}
-                  projectType={item.projectType}
-                  projectName={item.projectName}
-                  description={item.description}
-                  imageSrc={item.imageSrc}
-                />
-              )}
+              <PostCard
+                platform={item.platform}
+                author={item.author}
+                role={item.role}
+                date={item.date}
+                content={item.content}
+                postUrl={item.postUrl}
+              />
             </FadeUp>
           ))}
         </div>
