@@ -68,15 +68,10 @@ export const radii = {
   none: "0px",
 } as const;
 
-/**
- * External social / community destinations.
- * TODO: Replace these placeholder URLs with the live Fulatelier profiles.
- */
+/** External social / community destinations. */
 export const social = {
-  /** Primary Build Log destination (Facebook) — used by Work + Build Log sections */
-  buildLog: "https://www.facebook.com/fulatelier", // TODO: replace with real Build Log URL
-  facebook: "https://www.facebook.com/fulatelier", // TODO: replace with real Facebook URL
-  linkedin: "https://www.linkedin.com/company/fulatelier", // TODO: replace with real LinkedIn URL
+  facebook: "https://www.facebook.com/share/1DTy8pavJC/?mibextid=wwXIfr",
+  linkedin: "https://www.linkedin.com/in/gerald-fulatelier",
 } as const;
 
 /** Primary site navigation — shared by Nav and Footer. */
