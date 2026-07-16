@@ -1,35 +1,67 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { LiveFeedPanel } from "@/components/ui/LiveFeedPanel";
-import { SocialEmbed } from "@/components/ui/SocialEmbed";
+import { PostCard } from "@/components/ui/PostCard";
+import { ProjectLinkCard } from "@/components/ui/ProjectLinkCard";
 import { social } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const POSTS = [
+const MAIN_FEED = [
   {
+    kind: "post" as const,
     platform: "linkedin" as const,
-    // TODO: paste real LinkedIn "Embed this post" iframe code here
-    embedHtml: "",
-    fallbackUrl: social.linkedin,
-    ariaLabel: "LinkedIn post by Gerald Anderson",
+    author: "Gerald Anderson",
+    role: "Founder, Fulatelier LLC",
+    date: "Jul 14, 2026",
+    content:
+      "Building the Fulatelier website in public — every section documented, every decision explained. Dark luxury craftsman aesthetic, Next.js 14, Playfair Display. This is what build-in-public looks like for a boutique web studio.",
+    // TODO: replace with the real individual LinkedIn post URL once available
+    postUrl: social.linkedin,
   },
   {
+    kind: "project" as const,
+    status: "live" as const,
+    displayUrl: "for-living.it",
+    siteUrl: "https://www.for-living.it/",
+    projectType: "Reference · Premium Studio",
+    projectName: "For Living Milano",
+    description:
+      "Italian interior design studio — the editorial craft and precision we reference when building premium digital experiences.",
+  },
+  {
+    kind: "post" as const,
     platform: "facebook" as const,
-    // TODO: paste real Facebook embedded-post iframe code here
-    embedHtml: "",
-    fallbackUrl: social.facebook,
-    ariaLabel: "Facebook post from Fulatelier LLC",
+    author: "Fulatelier LLC",
+    date: "Jul 10, 2026",
+    content:
+      "Custom web development for Mississippi small businesses — starting at $500. No templates. No subscriptions. Built specifically for your business and your customers. Follow the page for weekly build updates.",
+    // TODO: replace with the real individual Facebook post URL once available
+    postUrl: social.facebook,
+  },
+];
+
+const REFERENCES = [
+  {
+    status: "live" as const,
+    displayUrl: "voxelo.ai",
+    siteUrl: "https://www.voxelo.ai/",
+    projectType: "Reference · Product Design",
+    projectName: "Voxelo",
+    description:
+      "3D and AI studio — clean product storytelling and motion-forward web design.",
   },
   {
-    platform: "linkedin" as const,
-    // TODO: paste real LinkedIn "Embed this post" iframe code here
-    embedHtml: "",
-    fallbackUrl: social.linkedin,
-    ariaLabel: "LinkedIn post by Gerald Anderson",
+    status: "live" as const,
+    displayUrl: "outfit.hellohello.is",
+    siteUrl: "https://outfit.hellohello.is/",
+    projectType: "Reference · Awwwards SOTD",
+    projectName: "Outfit by ++hellohello",
+    description:
+      "Awwwards Site of the Day — interaction design and animation at the highest level.",
   },
 ];
 
@@ -111,8 +143,43 @@ function SectionHeader({
   );
 }
 
+function FadeUp({
+  active,
+  reduceMotion,
+  delay,
+  children,
+}: {
+  active: boolean;
+  reduceMotion: boolean;
+  delay: number;
+  children: ReactNode;
+}) {
+  return (
+    <motion.div
+      className="h-full"
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
+      animate={
+        active
+          ? reduceMotion
+            ? { opacity: 1 }
+            : { opacity: 1, y: 0 }
+          : reduceMotion
+            ? { opacity: 0 }
+            : { opacity: 0, y: 20 }
+      }
+      transition={{
+        duration: reduceMotion ? 0 : 0.5,
+        delay: reduceMotion ? 0 : delay,
+        ease: EASE,
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 /**
- * Build Log — Live Feed of official LinkedIn & Facebook embeds.
+ * Build Log — Live Link cards to real posts and reference sites (no embeds).
  */
 export function BuildLog() {
   const reduceMotionPref = useReducedMotion();
@@ -134,36 +201,69 @@ export function BuildLog() {
 
         <LiveFeedPanel />
 
+        {/* Main feed */}
         <div className="mx-auto grid max-w-[1100px] grid-cols-1 gap-6 md:grid-cols-3">
-          {POSTS.map((post, index) => (
-            <motion.div
-              key={`${post.platform}-${index}`}
-              initial={
-                reduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }
+          {MAIN_FEED.map((item, index) => (
+            <FadeUp
+              key={
+                item.kind === "post"
+                  ? `${item.platform}-${item.date}`
+                  : item.displayUrl
               }
-              animate={
-                inView
-                  ? reduceMotion
-                    ? { opacity: 1 }
-                    : { opacity: 1, y: 0 }
-                  : reduceMotion
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: 20 }
-              }
-              transition={{
-                duration: reduceMotion ? 0 : 0.5,
-                delay: reduceMotion ? 0 : index * 0.12,
-                ease: EASE,
-              }}
+              active={inView}
+              reduceMotion={reduceMotion}
+              delay={index * 0.12}
             >
-              <SocialEmbed
-                platform={post.platform}
-                embedHtml={post.embedHtml}
-                fallbackUrl={post.fallbackUrl}
-                ariaLabel={post.ariaLabel}
-              />
-            </motion.div>
+              {item.kind === "post" ? (
+                <PostCard
+                  platform={item.platform}
+                  author={item.author}
+                  role={item.role}
+                  date={item.date}
+                  content={item.content}
+                  postUrl={item.postUrl}
+                />
+              ) : (
+                <ProjectLinkCard
+                  status={item.status}
+                  displayUrl={item.displayUrl}
+                  siteUrl={item.siteUrl}
+                  projectType={item.projectType}
+                  projectName={item.projectName}
+                  description={item.description}
+                />
+              )}
+            </FadeUp>
           ))}
+        </div>
+
+        {/* References row — for-living.it already in main feed above */}
+        <div className="mx-auto mt-12 max-w-[1100px]">
+          <p className="mb-6 text-center font-inter text-sm italic text-subtle">
+            The craft we reference. The standard we build toward.
+          </p>
+          <p className="mb-6 mt-12 text-center font-mono text-[9px] tracking-[0.2em] text-accent/50">
+            FUL://REFERENCES — Sites we study
+          </p>
+          <div className="mx-auto grid max-w-[720px] grid-cols-1 gap-6 md:grid-cols-2">
+            {REFERENCES.map((ref, index) => (
+              <FadeUp
+                key={ref.displayUrl}
+                active={inView}
+                reduceMotion={reduceMotion}
+                delay={0.36 + index * 0.12}
+              >
+                <ProjectLinkCard
+                  status={ref.status}
+                  displayUrl={ref.displayUrl}
+                  siteUrl={ref.siteUrl}
+                  projectType={ref.projectType}
+                  projectName={ref.projectName}
+                  description={ref.description}
+                />
+              </FadeUp>
+            ))}
+          </div>
         </div>
 
         <div className="mt-14 text-center">
