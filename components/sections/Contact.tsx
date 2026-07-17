@@ -15,8 +15,7 @@ import { social } from "@/lib/constants";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** Replace YOUR_FORM_ID with the real Formspree form endpoint after account setup. */
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaqegnk";
 
 const FIELD_CLASS =
   "w-full appearance-none border bg-background px-4 py-3 font-inter text-sm text-text outline-none transition-[border-color,background-color] duration-150 ease-out placeholder:text-subtle focus:border-accent/80 focus:bg-[#0D1E35]";
@@ -457,7 +456,6 @@ function ProjectBriefForm() {
         noValidate
         className="flex flex-col gap-5"
       >
-        {/* FORMSPREE: replace YOUR_FORM_ID in FORMSPREE_ENDPOINT above */}
         <input
           type="hidden"
           name="_subject"

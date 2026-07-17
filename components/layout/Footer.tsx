@@ -33,7 +33,7 @@ export function Footer() {
               aria-hidden="true"
             />
             <p className="font-mono text-[9px] tracking-[0.2em] text-accent/50">
-              EST. 2024 · JACKSON, MS
+              EST. 2026 · JACKSON, MS
             </p>
           </div>
 
