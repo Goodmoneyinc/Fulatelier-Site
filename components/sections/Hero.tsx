@@ -54,6 +54,8 @@ function Headline({ alignLeft }: { alignLeft?: boolean }) {
         alignLeft ? "text-left" : "text-center",
       ].join(" ")}
       style={{
+        WebkitTextStroke: "1.5px #0A1628",
+        paintOrder: "stroke fill",
         textShadow:
           "0 0 8px rgba(10, 22, 40, 1), 0 2px 40px rgba(10, 22, 40, 1), 0 4px 80px rgba(10, 22, 40, 0.95)",
       }}
