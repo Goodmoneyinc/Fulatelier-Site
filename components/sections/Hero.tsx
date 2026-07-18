@@ -152,7 +152,7 @@ export function Hero() {
           </motion.div>
 
           <motion.p
-            className="mb-4 font-mono text-[10px] tracking-[0.2em] text-accent/65"
+            className="mb-4 font-mono text-[10px] tracking-[0.2em] text-text"
             {...fadeUp(1.5)}
           >
             FUL://ATELIER
