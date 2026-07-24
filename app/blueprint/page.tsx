@@ -127,7 +127,7 @@ export default function BlueprintPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
       <BlueprintHeader />
-      <main id="main-content" tabIndex={-1} className="flex-1 bg-[#0A0A0B] outline-none">
+      <main id="main-content" tabIndex={-1} className="flex-1 bg-background outline-none">
         <Hero />
         <Problem />
         <BlueprintTimeline />

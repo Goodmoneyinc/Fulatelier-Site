@@ -1,15 +1,15 @@
 import { BlueprintGrid } from "@/components/ui/BlueprintGrid";
-import { CTAButton } from "@/components/blueprint/CTAButton";
+import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/blueprint/Reveal";
 
 export function FinalCTA() {
   return (
     <section
-      className="relative w-full overflow-hidden bg-[#0A0A0B] py-28 md:py-36"
+      className="relative w-full overflow-hidden border-t border-accent/30 bg-background py-28 md:py-36"
       aria-labelledby="final-cta-heading"
     >
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute left-1/2 top-1/2 h-[70vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 rounded-[9999px] bg-[radial-gradient(ellipse_at_center,rgba(163,126,44,0.14),transparent_65%)] blur-[10px]" />
+        <div className="absolute left-1/2 top-1/2 h-[70vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,rgba(163,126,44,0.14),transparent_65%)] blur-[10px]" />
       </div>
       <BlueprintGrid className="opacity-50" />
 
@@ -31,7 +31,7 @@ export function FinalCTA() {
 
         <Reveal delay={0.2}>
           <div className="mt-11">
-            <CTAButton href="#apply">Apply Now</CTAButton>
+            <Button href="#apply">Apply Now</Button>
           </div>
         </Reveal>
       </div>

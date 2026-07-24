@@ -59,12 +59,12 @@ const REASONS = [
 export function WhyFulatelier() {
   return (
     <section
-      className="relative w-full bg-[#0A0A0B] py-24 md:py-32"
+      className="relative w-full border-t border-accent/30 bg-background py-24 md:py-32"
       aria-labelledby="why-heading"
     >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
         <SectionHeading
-          eyebrow="Why Fulatelier"
+          eyebrow="FUL://STUDIO"
           id="why-heading"
           title="The Studio Behind the Blueprint."
         />
@@ -72,8 +72,8 @@ export function WhyFulatelier() {
         <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {REASONS.map((reason, index) => (
             <Reveal key={reason.title} delay={0.06 * index}>
-              <div className="h-full rounded-[20px] border border-white/[0.07] bg-white/[0.025] p-7 text-center backdrop-blur-md transition-[border-color,transform] duration-300 ease-out hover:-translate-y-1 hover:border-accent-light/30">
-                <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-[9999px] border border-accent-light/25 bg-accent/[0.08] text-accent-light">
+              <div className="h-full border border-accent/30 bg-card p-7 text-center transition-[border-color,transform] duration-300 ease-out hover:-translate-y-1 hover:border-accent-light">
+                <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center border border-accent/30 bg-accent/[0.08] text-accent">
                   {reason.icon}
                 </div>
                 <h3 className="font-cormorant text-[20px] font-semibold leading-tight tracking-[-0.01em] text-text">

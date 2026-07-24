@@ -27,13 +27,13 @@ const PROBLEMS = [
 export function Problem() {
   return (
     <section
-      className="relative w-full bg-[#0A0A0B] py-24 md:py-32"
+      className="relative w-full border-t border-accent/30 bg-background py-24 md:py-32"
       aria-labelledby="problem-heading"
     >
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-16 px-6 sm:px-8 lg:grid-cols-[0.85fr_1fr] lg:gap-20">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <Reveal>
-            <Eyebrow>The Problem</Eyebrow>
+            <Eyebrow>FUL://PROBLEM</Eyebrow>
           </Reveal>
           <Reveal delay={0.08}>
             <h2
@@ -61,17 +61,17 @@ export function Problem() {
               <div
                 className={[
                   "flex gap-6 py-7",
-                  index < PROBLEMS.length - 1 ? "border-b border-white/[0.07]" : "",
+                  index < PROBLEMS.length - 1 ? "border-b border-accent/25" : "",
                 ].join(" ")}
               >
-                <span className="shrink-0 font-cormorant text-[15px] font-semibold text-accent-light/70">
+                <span className="shrink-0 font-mono text-[10px] tracking-[0.15em] text-accent/65">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h3 className="font-inter text-base font-semibold text-text">
+                  <h3 className="font-cormorant text-[20px] font-semibold text-text">
                     {problem.title}
                   </h3>
-                  <p className="mt-2 font-inter text-[15px] leading-[1.75] text-subtle">
+                  <p className="mt-2 font-inter text-[14px] leading-[1.7] text-subtle">
                     {problem.body}
                   </p>
                 </div>

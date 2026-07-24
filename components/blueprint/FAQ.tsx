@@ -50,14 +50,14 @@ function AccordionItem({
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="rounded-[18px] border border-white/[0.08] bg-white/[0.02] backdrop-blur-md transition-colors duration-200 ease-out data-[open=true]:border-accent-light/30" data-open={isOpen}>
+    <div className="border border-accent/30 bg-card transition-colors duration-200 ease-out data-[open=true]:border-accent-light" data-open={isOpen}>
       <h3>
         <button
           type="button"
           onClick={onToggle}
           aria-expanded={isOpen}
           aria-controls={panelId}
-          className="flex w-full items-center justify-between gap-6 rounded-[18px] px-6 py-5 text-left font-inter text-[16px] font-medium text-text transition-colors duration-200 ease-out hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B872] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0B] sm:px-8 sm:py-6 sm:text-[17px]"
+          className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left font-inter text-[16px] font-medium text-text transition-colors duration-200 ease-out hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:px-8 sm:py-6 sm:text-[17px]"
         >
           <span>{question}</span>
           <motion.span
@@ -98,11 +98,11 @@ export function FAQ() {
 
   return (
     <section
-      className="relative w-full bg-[#0E0E10] py-24 md:py-32"
+      className="relative w-full border-t border-accent/30 bg-background py-24 md:py-32"
       aria-labelledby="faq-heading"
     >
       <div className="mx-auto max-w-[760px] px-6 sm:px-8">
-        <SectionHeading eyebrow="Questions" id="faq-heading" title="Frequently Asked." />
+        <SectionHeading eyebrow="FUL://FAQ" id="faq-heading" title="Frequently Asked." />
 
         <div className="mt-14 flex flex-col gap-4">
           {FAQS.map((faq, index) => (

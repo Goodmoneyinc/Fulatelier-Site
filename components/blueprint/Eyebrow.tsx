@@ -8,7 +8,7 @@ export function Eyebrow({
   return (
     <p
       className={[
-        "mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-accent-light/80",
+        "mb-4 font-mono text-[10px] tracking-[0.2em] text-accent/65",
         className,
       ].join(" ")}
     >

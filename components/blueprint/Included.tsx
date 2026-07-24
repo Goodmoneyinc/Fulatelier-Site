@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/blueprint/SectionHeading";
 
 function IconWrap({ children }: { children: ReactNode }) {
   return (
-    <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-[12px] border border-accent-light/25 bg-accent/[0.08] text-accent-light">
+    <div className="mb-6 flex h-11 w-11 items-center justify-center border border-accent/30 bg-accent/[0.08] text-accent">
       {children}
     </div>
   );
@@ -78,12 +78,12 @@ const ITEMS = [
 export function Included() {
   return (
     <section
-      className="relative w-full bg-[#0A0A0B] py-24 md:py-32"
+      className="relative w-full border-t border-accent/30 bg-background py-24 md:py-32"
       aria-labelledby="included-heading"
     >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
         <SectionHeading
-          eyebrow="What's Included"
+          eyebrow="FUL://INCLUDED"
           id="included-heading"
           title="Everything You Need to Decide — Before You Spend Anything."
         />
@@ -91,7 +91,7 @@ export function Included() {
         <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ITEMS.map((item, index) => (
             <Reveal key={item.title} delay={0.06 * index}>
-              <div className="group h-full rounded-[20px] border border-white/[0.07] bg-white/[0.025] p-8 backdrop-blur-md transition-[border-color,background-color,transform] duration-300 ease-out hover:-translate-y-1 hover:border-accent-light/30 hover:bg-white/[0.04]">
+              <div className="group h-full border border-accent/30 bg-card p-8 transition-[border-color,transform] duration-300 ease-out hover:-translate-y-1 hover:border-accent-light">
                 <IconWrap>{item.icon}</IconWrap>
                 <h3 className="font-cormorant text-[21px] font-semibold leading-tight tracking-[-0.01em] text-text">
                   {item.title}

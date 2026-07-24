@@ -39,12 +39,12 @@ export function BlueprintTimeline() {
   return (
     <section
       id="process"
-      className="relative w-full bg-[#0E0E10] py-24 md:py-32"
+      className="relative w-full border-t border-accent/30 bg-background py-24 md:py-32"
       aria-labelledby="timeline-heading"
     >
       <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
         <SectionHeading
-          eyebrow="The Blueprint"
+          eyebrow="FUL://BLUEPRINT"
           id="timeline-heading"
           title="Five Steps. Zero Risk."
           description="A clear, guided path from first conversation to launch — you always know exactly what's next."
@@ -53,7 +53,7 @@ export function BlueprintTimeline() {
         <div className="relative mt-20">
           <div
             ref={lineRef}
-            className="absolute left-[19px] top-0 hidden h-full w-px bg-white/[0.08] lg:left-0 lg:top-[19px] lg:h-px lg:w-full lg:block"
+            className="absolute left-[19px] top-0 hidden h-full w-px bg-accent/20 lg:left-0 lg:top-[19px] lg:h-px lg:w-full lg:block"
             aria-hidden="true"
           >
             <motion.div
@@ -81,11 +81,11 @@ export function BlueprintTimeline() {
                 delay={0.1 * index}
                 className="relative flex gap-6 pl-[52px] lg:flex-col lg:gap-0 lg:pl-0"
               >
-                <div className="absolute left-0 top-0 flex h-10 w-10 shrink-0 items-center justify-center rounded-[9999px] border border-accent-light/50 bg-[#0E0E10] font-cormorant text-base font-semibold text-accent-light lg:relative">
+                <div className="absolute left-0 top-0 flex h-10 w-10 shrink-0 items-center justify-center border border-accent bg-background font-cormorant text-base font-semibold text-accent-light lg:relative">
                   {index + 1}
                 </div>
 
-                <div className="rounded-[20px] border border-white/[0.07] bg-white/[0.025] p-6 backdrop-blur-md lg:mt-8">
+                <div className="border border-accent/30 bg-card p-6 lg:mt-8">
                   <h3 className="font-cormorant text-[22px] font-semibold leading-tight tracking-[-0.01em] text-text">
                     {step.title}
                   </h3>

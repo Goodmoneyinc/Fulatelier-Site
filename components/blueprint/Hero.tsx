@@ -3,7 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { BlueprintGrid } from "@/components/ui/BlueprintGrid";
 import { LogoMark } from "@/components/ui/LogoMark";
-import { CTAButton } from "@/components/blueprint/CTAButton";
+import { ArrowLink } from "@/components/ui/ArrowLink";
+import { Button } from "@/components/ui/Button";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -19,13 +20,13 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] w-full items-center overflow-hidden bg-[#0A0A0B] pt-28 pb-20"
+      className="relative flex min-h-[100svh] w-full items-center overflow-hidden bg-background pt-28 pb-20"
       aria-labelledby="hero-heading"
     >
       {/* Ambient brass glow */}
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-        <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 rounded-[9999px] bg-[radial-gradient(ellipse_at_center,rgba(163,126,44,0.16),transparent_65%)] blur-[10px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] h-[50vh] w-[50vw] rounded-[9999px] bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.08),transparent_70%)] blur-[10px]" />
+        <div className="absolute left-1/2 top-[-10%] h-[60vh] w-[80vw] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(163,126,44,0.16),transparent_65%)] blur-[10px]" />
+        <div className="absolute bottom-[-20%] right-[-10%] h-[50vh] w-[50vw] bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.08),transparent_70%)] blur-[10px]" />
       </div>
 
       <BlueprintGrid className="opacity-70" animateIn />
@@ -37,9 +38,9 @@ export function Hero() {
 
         <motion.p
           {...fadeUp(0.08)}
-          className="mb-6 rounded-[9999px] border border-white/[0.08] bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] text-accent-light/90 backdrop-blur-md"
+          className="mb-6 border border-accent/50 bg-transparent px-4 py-1.5 font-mono text-[10px] tracking-[0.2em] text-accent"
         >
-          Selecting 5 Mississippi Businesses Monthly
+          SELECTING 5 MISSISSIPPI BUSINESSES MONTHLY
         </motion.p>
 
         <motion.h1
@@ -48,9 +49,7 @@ export function Hero() {
           className="max-w-[16ch] font-cormorant text-[44px] font-semibold leading-[1.04] tracking-[-0.02em] text-text sm:text-[64px] md:text-[84px]"
         >
           See Your New Website{" "}
-          <span className="bg-gradient-to-b from-[#E8CE8E] to-[#A37E2C] bg-clip-text text-transparent">
-            Before You Spend a Dollar.
-          </span>
+          <span className="text-accent-light">Before You Spend a Dollar.</span>
         </motion.h1>
 
         <motion.p
@@ -66,26 +65,15 @@ export function Hero() {
           {...fadeUp(0.44)}
           className="mt-11 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-6"
         >
-          <CTAButton href="#apply" className="w-full sm:w-auto">
+          <Button href="#apply" className="w-full sm:w-auto">
             Apply for Your Digital Storefront Blueprint
-          </CTAButton>
-          <a
-            href="#portfolio"
-            className="group inline-flex min-h-12 items-center gap-2.5 rounded-[9999px] px-4 font-inter text-sm font-medium text-subtle transition-colors duration-200 ease-out hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9B872] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0B]"
-          >
-            View Recent Work
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-1"
-            >
-              →
-            </span>
-          </a>
+          </Button>
+          <ArrowLink href="#portfolio">View Recent Work</ArrowLink>
         </motion.div>
 
         <motion.p
           {...fadeUp(0.56)}
-          className="mt-6 font-inter text-[13px] text-subtle/70"
+          className="mt-6 font-inter text-[13px] text-subtle"
         >
           The Fulatelier Zero-Risk Guarantee™ — no payment until you approve
           the design.

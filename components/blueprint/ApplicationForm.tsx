@@ -2,7 +2,7 @@
 
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { CTAButton } from "@/components/blueprint/CTAButton";
+import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/blueprint/Eyebrow";
 import { GlassPanel } from "@/components/blueprint/GlassPanel";
 import { Reveal } from "@/components/blueprint/Reveal";
@@ -11,7 +11,7 @@ import { SectionHeading } from "@/components/blueprint/SectionHeading";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdaqegnk";
 
 const FIELD_CLASS =
-  "w-full appearance-none rounded-[14px] border bg-white/[0.03] px-4 py-3.5 font-inter text-[15px] text-text outline-none backdrop-blur-md transition-[border-color,background-color] duration-150 ease-out placeholder:text-subtle/60 focus:border-accent-light/60 focus:bg-white/[0.05]";
+  "w-full appearance-none border bg-background px-4 py-3.5 font-inter text-[15px] text-text outline-none transition-[border-color,background-color] duration-150 ease-out placeholder:text-subtle focus:border-accent/80 focus:bg-[#0D1E35]";
 
 const LABEL_CLASS =
   "mb-2 block font-inter text-[11px] font-semibold uppercase tracking-[0.15em] text-subtle";
@@ -33,7 +33,7 @@ function FieldError({ message }: { message?: string }) {
   if (!message) return null;
   return (
     <p
-      className="mt-1.5 font-inter text-[11px] text-[#E8998A]"
+      className="mt-1.5 font-inter text-[11px] text-[#E57373]"
       role="alert"
       aria-live="polite"
     >
@@ -83,7 +83,7 @@ function TextField({
         onChange={onChange}
         className={[
           FIELD_CLASS,
-          error ? "border-[#E8998A]/60" : "border-white/[0.09]",
+          error ? "border-accent" : "border-accent/35",
         ].join(" ")}
       />
       {hint ? <p className="mt-1.5 font-inter text-[11px] text-subtle/70">{hint}</p> : null}
@@ -129,13 +129,13 @@ function SelectField({
           className={[
             FIELD_CLASS,
             "appearance-none pr-10",
-            error ? "border-[#E8998A]/60" : "border-white/[0.09]",
+            error ? "border-accent" : "border-accent/35",
           ].join(" ")}
         >
           {children}
         </select>
         <span
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-accent-light"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-accent"
           aria-hidden="true"
         >
           ▾
@@ -186,7 +186,7 @@ function TextAreaField({
         className={[
           FIELD_CLASS,
           "resize-y",
-          error ? "border-[#E8998A]/60" : "border-white/[0.09]",
+          error ? "border-accent" : "border-accent/35",
         ].join(" ")}
       />
       <p className="mt-1.5 text-right font-inter text-[11px] text-subtle/60">
@@ -206,7 +206,7 @@ function SuccessPanel() {
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="mx-auto text-accent-light"
+        className="mx-auto text-accent"
         aria-hidden="true"
       >
         <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" />
@@ -226,7 +226,7 @@ function SuccessPanel() {
         this month&apos;s five Blueprint spots, Gerald will reach out within
         24 hours to schedule your design walkthrough.
       </p>
-      <p className="mt-6 font-mono text-xs text-accent-light">
+      <p className="mt-6 font-mono text-xs text-accent">
         Remember — you never pay until you see and approve the design.
       </p>
     </div>
@@ -316,12 +316,12 @@ export function ApplicationForm() {
   return (
     <section
       id="apply"
-      className="relative w-full bg-[#0A0A0B] py-24 md:py-32"
+      className="relative w-full border-t border-accent/30 bg-background py-24 md:py-32"
       aria-labelledby="apply-heading"
     >
       <div className="mx-auto max-w-[840px] px-6 sm:px-8">
         <SectionHeading
-          eyebrow="Apply"
+          eyebrow="FUL://APPLY"
           id="apply-heading"
           title="Apply for the Blueprint."
           description="Two minutes to complete. We personally review every application — no bots, no auto-replies deciding your fit."
@@ -481,14 +481,14 @@ export function ApplicationForm() {
                   whileHover={reduceMotion ? undefined : { scale: 1.01 }}
                   className="mt-3"
                 >
-                  <CTAButton
+                  <Button
                     type="submit"
                     disabled={submitting}
                     className="w-full"
                     aria-label="Apply for the Blueprint"
                   >
                     {submitting ? "Submitting..." : "Apply for the Blueprint"}
-                  </CTAButton>
+                  </Button>
                 </motion.div>
 
                 <p className="text-center font-inter text-[12px] leading-relaxed text-subtle/70">
@@ -498,7 +498,7 @@ export function ApplicationForm() {
 
                 {submitError ? (
                   <p
-                    className="text-center font-inter text-[13px] text-[#E8998A]"
+                    className="text-center font-inter text-[13px] text-[#E57373]"
                     role="alert"
                     aria-live="polite"
                   >
