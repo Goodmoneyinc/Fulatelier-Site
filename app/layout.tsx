@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
-import { IntroReveal } from "@/components/intro/IntroReveal";
-import { Footer } from "@/components/layout/Footer";
-import { Nav } from "@/components/layout/Nav";
 import "@/styles/globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -87,16 +84,7 @@ export default function RootLayout({
       className={`${cormorant.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-background font-inter text-text antialiased">
-        <IntroReveal />
-        <Nav />
-        <main
-          id="main-content"
-          tabIndex={-1}
-          className="flex-1 outline-none"
-        >
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
