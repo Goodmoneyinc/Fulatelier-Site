@@ -31,7 +31,9 @@ export function FinalCTA() {
 
         <Reveal delay={0.2}>
           <div className="mt-11">
-            <Button href="#apply">Apply Now</Button>
+            <Button href="#apply" className="hover:!border-accent hover:!bg-accent">
+              Apply Now
+            </Button>
           </div>
         </Reveal>
       </div>

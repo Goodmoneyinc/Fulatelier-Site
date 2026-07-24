@@ -40,7 +40,11 @@ export function BlueprintHeader() {
           </span>
         </a>
 
-        <Button href="#apply" aria-label="Apply for Your Digital Storefront Blueprint">
+        <Button
+          href="#apply"
+          className="hover:!border-accent hover:!bg-accent"
+          aria-label="Apply for Your Digital Storefront Blueprint"
+        >
           Apply Now
         </Button>
       </div>

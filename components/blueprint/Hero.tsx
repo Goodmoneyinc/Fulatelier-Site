@@ -65,7 +65,10 @@ export function Hero() {
           {...fadeUp(0.44)}
           className="mt-11 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row sm:gap-6"
         >
-          <Button href="#apply" className="w-full sm:w-auto">
+          <Button
+            href="#apply"
+            className="w-full hover:!border-accent hover:!bg-accent sm:w-auto"
+          >
             Apply for Your Digital Storefront Blueprint
           </Button>
           <ArrowLink href="#portfolio">View Recent Work</ArrowLink>

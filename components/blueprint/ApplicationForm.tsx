@@ -484,7 +484,7 @@ export function ApplicationForm() {
                   <Button
                     type="submit"
                     disabled={submitting}
-                    className="w-full"
+                    className="w-full hover:!border-accent hover:!bg-accent"
                     aria-label="Apply for the Blueprint"
                   >
                     {submitting ? "Submitting..." : "Apply for the Blueprint"}

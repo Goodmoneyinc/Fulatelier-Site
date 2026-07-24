@@ -43,7 +43,7 @@ export function LimitedAvailability() {
 
         <Reveal delay={0.24}>
           <div className="mt-10">
-            <Button href="#apply">
+            <Button href="#apply" className="hover:!border-accent hover:!bg-accent">
               Apply for Your Digital Storefront Blueprint
             </Button>
           </div>
