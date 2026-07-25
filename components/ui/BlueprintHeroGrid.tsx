@@ -79,6 +79,23 @@ export function BlueprintHeroGrid({ children }: { children: ReactNode }) {
       className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden"
       style={{ backgroundColor: "#0A1628" }}
     >
+      {/* Mobile only — flat compass photo behind the grid. No parallax,
+          no mouse tracking; desktop stays pure grid. */}
+      <div
+        className="absolute inset-0 z-0 md:hidden"
+        style={{
+          backgroundImage: "url('/hero-compass-poster.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center right",
+        }}
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(10, 22, 40, 0.75)" }}
+        />
+      </div>
+
       {/* Base grid — always visible, faint */}
       <div
         className="absolute inset-0 z-0 opacity-[0.07] md:opacity-[0.04]"
@@ -96,9 +113,12 @@ export function BlueprintHeroGrid({ children }: { children: ReactNode }) {
         <FulatelierGrid offsetX={gridOffsetX} offsetY={gridOffsetY} color="#C9A84C" />
       </motion.div>
 
-      {/* Radial vignette — keeps content readable over the grid */}
+      {/* Radial vignette — keeps content readable over the grid. Desktop
+          only: on mobile it stacks on top of the compass-photo overlay
+          above and, on a narrow/tall viewport, its edge falloff covers
+          nearly the whole screen — pushing the photo to invisible. */}
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-0 hidden md:block"
         style={{
           background:
             "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 0%, rgba(10, 22, 40, 0.6) 70%, rgba(10, 22, 40, 0.92) 100%)",
