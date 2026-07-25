@@ -17,6 +17,15 @@ const HEADLINE_DELAY = 1.7;
 const OVERLAY_GRADIENT =
   "linear-gradient(to right, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.85) 45%, rgba(10,22,40,0.55) 65%, rgba(10,22,40,0.25) 100%)";
 
+const MOBILE_BREAKPOINT_PX = 768;
+/** Only used if `play()` fails or rejects before duration is known. */
+const FINAL_FRAME_FALLBACK_SECONDS = 4.9;
+/** Legacy vendor attributes with no typed React prop — old iOS Safari / Tencent X5 WebView. */
+const LEGACY_PLAYSINLINE_ATTRS = {
+  "webkit-playsinline": "true",
+  "x5-playsinline": "true",
+} as Record<string, string>;
+
 function RevealedWord({
   word,
   delay,
@@ -95,8 +104,20 @@ export function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
+    // Mobile gets the compressed, smaller-dimension source — swapping
+    // `src` directly on <video> (rather than the child <source>) takes
+    // precedence per spec, so this is safe before the browser has
+    // started loading the default source.
+    const isMobile = window.innerWidth < MOBILE_BREAKPOINT_PX;
+    if (isMobile) {
+      video.src = "/hero-compass-mobile.mp4";
+      video.load();
+    }
+
     const holdFinalFrame = () => {
-      video.currentTime = video.duration;
+      video.currentTime = Number.isFinite(video.duration)
+        ? video.duration
+        : FINAL_FRAME_FALLBACK_SECONDS;
       video.pause();
     };
 
@@ -109,6 +130,12 @@ export function Hero() {
       }
       return;
     }
+
+    // Belt-and-suspenders: some mobile browsers ignore the autoPlay
+    // attribute until play() is called explicitly. If it's rejected
+    // (autoplay blocked), fall back to the held final frame rather
+    // than leaving a blank/frozen first frame.
+    video.play().catch(holdFinalFrame);
 
     video.addEventListener("ended", holdFinalFrame);
     return () => {
@@ -131,10 +158,13 @@ export function Hero() {
         ref={videoRef}
         autoPlay
         muted
+        loop={false}
         playsInline
+        preload="auto"
         poster="/hero-compass-poster.jpg"
         className="absolute inset-0 z-0 h-full w-full object-cover object-center"
         style={{ filter: "brightness(0.85)" }}
+        {...LEGACY_PLAYSINLINE_ATTRS}
       >
         <source src="/hero-compass.mp4" type="video/mp4" />
       </video>
