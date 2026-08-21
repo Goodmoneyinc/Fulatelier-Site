@@ -2,6 +2,11 @@ name: Fetch hero assets
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - claude/fulatelier-cinematic-upgrade-h5wy91
+    paths:
+      - .github/workflows/fetch-hero-assets.yml
 
 permissions:
   contents: write
