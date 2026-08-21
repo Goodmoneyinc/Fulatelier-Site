@@ -1,0 +1,30 @@
+name: Fetch hero assets
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/fulatelier-cinematic-upgrade-h5wy91
+
+      - name: Download hero video and extract poster
+        run: |
+          curl -sSL -o public/hero-compass-v2.mp4 "https://d8j0ntlcm91z4.cloudfront.net/user_3H42ERJIPcD1s8M8ZAXjnf1iYQ7/hf_20260821_014657_0a58f8f7-e269-4540-81ae-8c7273bbcbc3.mp4"
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 public/hero-compass-v2.mp4
+          ffmpeg -y -ss 7.8 -i public/hero-compass-v2.mp4 -frames:v 1 -q:v 2 public/hero-compass-v2-poster.jpg
+          ls -la public/hero-compass-v2.mp4 public/hero-compass-v2-poster.jpg
+
+      - name: Commit assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/hero-compass-v2.mp4 public/hero-compass-v2-poster.jpg
+          git commit -m "Add Higgsfield hero video and poster frame"
+          git push origin claude/fulatelier-cinematic-upgrade-h5wy91
