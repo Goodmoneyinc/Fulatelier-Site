@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useState } from "react";
 import { BrowserFrame } from "@/components/ui/BrowserFrame";
 
 export type ProjectCardProps = {
@@ -8,11 +11,16 @@ export type ProjectCardProps = {
   href?: string;
   featured?: boolean;
   className?: string;
+  /** Optional clip revealed while the card is hovered (desktop only) */
+  hoverVideo?: string;
 };
 
 /**
  * Portfolio project card — BrowserFrame with Cormorant initial placeholder,
  * overlapping pill type-badge, gold hover overlay, and meta below the frame.
+ * When `hoverVideo` is provided, hovering reveals a playing clip over the
+ * image area; the card falls back to its static state on touch devices or
+ * if the video file is missing.
  */
 export function ProjectCard({
   title,
@@ -22,12 +30,41 @@ export function ProjectCard({
   href = "#work",
   featured = false,
   className = "",
+  hoverVideo,
 }: ProjectCardProps) {
   const initial = title.trim().charAt(0).toUpperCase();
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  const showVideo = Boolean(hoverVideo) && !videoFailed;
+
+  const handleMouseEnter = () => {
+    if (!showVideo) return;
+    if ("ontouchstart" in window) return;
+    setIsHovered(true);
+    videoRef.current?.play().catch(() => {
+      // Autoplay rejection or missing file — keep the static card.
+      setVideoFailed(true);
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!showVideo) return;
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
 
   return (
     <a
       href={href}
+      data-cursor-hover
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className={[
         "group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
@@ -50,6 +87,26 @@ export function ProjectCard({
               {initial}
             </span>
           </div>
+
+          {showVideo ? (
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              src={hoverVideo}
+              onError={() => setVideoFailed(true)}
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                transition: isHovered
+                  ? "opacity 300ms ease"
+                  : "opacity 200ms ease",
+              }}
+            />
+          ) : null}
 
           <div
             aria-hidden="true"

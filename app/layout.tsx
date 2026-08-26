@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Mono, Inter } from "next/font/google";
+import { FulatelierCursor } from "@/components/ui/FulatelierCursor";
 import "@/styles/globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -84,6 +85,7 @@ export default function RootLayout({
       className={`${cormorant.variable} ${inter.variable} ${ibmPlexMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-background font-inter text-text antialiased">
+        <FulatelierCursor />
         {children}
       </body>
     </html>

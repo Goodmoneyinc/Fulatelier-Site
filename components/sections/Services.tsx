@@ -150,10 +150,18 @@ export function Services() {
   return (
     <section
       id="services"
-      className="section-fulatelier bg-background"
+      className="section-fulatelier relative overflow-hidden bg-background"
       aria-labelledby="services-heading"
     >
-      <div className="container-fulatelier">
+      {/* Editorial section number — asymmetric watermark behind the header */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute left-[-2%] top-0 select-none font-cormorant text-[clamp(160px,22vw,240px)] font-bold leading-none tracking-[-0.06em] text-accent opacity-5"
+      >
+        02
+      </span>
+
+      <div className="container-fulatelier relative z-10">
         <div ref={headerRef}>
           <SectionHeader active={headerInView} reduceMotion={reduceMotion} />
         </div>
