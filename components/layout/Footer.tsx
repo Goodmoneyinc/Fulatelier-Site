@@ -1,12 +1,61 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { LogoMark } from "@/components/ui/LogoMark";
 import { navLinks, social } from "@/lib/constants";
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+const HEADLINE_WORDS = "Ready to build something that lasts?".split(" ");
+
+/**
+ * Footer CTA headline — word-by-word clip reveal on scroll-in.
+ * Reduced motion swaps the clip animation for a single fade.
+ */
+function CinematicHeadline({ reduceMotion }: { reduceMotion: boolean }) {
+  const ref = useRef<HTMLHeadingElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+
+  return (
+    <p
+      ref={ref}
+      className="font-cormorant text-[clamp(40px,5vw,68px)] font-semibold leading-[1.05] tracking-[-0.02em] text-text"
+    >
+      {HEADLINE_WORDS.map((word, i) => (
+        <span key={`${word}-${i}`} className="inline-block">
+          <motion.span
+            className="inline-block"
+            initial={
+              reduceMotion
+                ? { opacity: 0 }
+                : { clipPath: "inset(100% 0 0 0)", y: "0.15em" }
+            }
+            animate={
+              inView
+                ? reduceMotion
+                  ? { opacity: 1 }
+                  : { clipPath: "inset(0% 0 0 0)", y: "0em" }
+                : undefined
+            }
+            transition={{
+              duration: reduceMotion ? 0.4 : 0.38,
+              delay: reduceMotion ? 0 : i * 0.045,
+              ease: EASE,
+            }}
+          >
+            {word}
+          </motion.span>
+          {i < HEADLINE_WORDS.length - 1 ? " " : null}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 /**
  * Site footer — tonal navy close, strongest gold rules on the page.
- * Static on arrival; only the CTA arrow pulses (unless reduced motion).
+ * Opens with the cinematic CTA headline; the CTA arrow turning gold on
+ * hover is primary gold use #3 of 3.
  */
 export function Footer() {
   const reduceMotionPref = useReducedMotion();
@@ -18,7 +67,29 @@ export function Footer() {
       <div className="h-px w-full bg-accent" aria-hidden="true" />
 
       <div className="mx-auto max-w-[1100px] px-6 pb-10 pt-16 lg:px-8">
-        <div className="grid grid-cols-1 gap-0 md:grid-cols-3 md:gap-12">
+        {/* Cinematic CTA — headline, subtext, arrow */}
+        <div className="border-b border-accent/30 pb-14 md:pb-16">
+          <CinematicHeadline reduceMotion={reduceMotion} />
+          <p className="mt-5 font-inter text-base text-subtle">
+            Five Mississippi businesses selected each month.
+          </p>
+          <a
+            href="#contact"
+            className="group mt-8 inline-flex items-baseline gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
+          >
+            <span className="font-cormorant text-[22px] font-bold text-text transition-colors duration-200 ease-out group-hover:text-accent-light">
+              START YOUR PROJECT
+            </span>
+            <span
+              aria-hidden="true"
+              className="font-cormorant text-[22px] text-text transition-[transform,color] duration-200 ease-out group-hover:translate-x-1.5 group-hover:text-accent"
+            >
+              →
+            </span>
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 gap-0 pt-14 md:grid-cols-3 md:gap-12 md:pt-16">
           {/* LEFT — brand (mobile order 2) */}
           <div className="order-2 border-b border-accent/30 pb-10 md:order-1 md:border-b-0 md:pb-0">
             <LogoMark className="mb-4 h-9 w-9" />
@@ -65,36 +136,12 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* RIGHT — CTA (mobile order 1) */}
+          {/* RIGHT — connect (mobile order 1) */}
           <div className="order-1 border-b border-accent/30 pb-10 md:order-3 md:border-b-0 md:pb-0">
-            <a
-              href="#contact"
-              className="group inline-block transition-colors duration-200 ease-out hover:text-accent-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
-            >
-              <span className="mb-2 block font-cormorant text-[22px] font-bold text-text transition-colors duration-200 ease-out group-hover:text-accent-light">
-                START YOUR PROJECT
-              </span>
-              <motion.span
-                aria-hidden="true"
-                className="mb-6 block font-cormorant text-[22px] text-accent transition-transform duration-200 ease-out group-hover:translate-x-1.5"
-                animate={
-                  reduceMotion ? { opacity: 1 } : { opacity: [1, 0.4, 1] }
-                }
-                transition={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }
-                }
-              >
-                →
-              </motion.span>
-            </a>
-
-            <div className="mt-8 flex items-center gap-2.5">
+            <p className="mb-5 font-mono text-[9px] tracking-[0.2em] text-accent/55">
+              CONNECT
+            </p>
+            <div className="flex items-center gap-2.5">
               <a
                 href={social.linkedin}
                 target="_blank"

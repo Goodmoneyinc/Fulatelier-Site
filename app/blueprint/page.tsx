@@ -11,6 +11,7 @@ import { LimitedAvailability } from "@/components/blueprint/LimitedAvailability"
 import { Portfolio } from "@/components/blueprint/Portfolio";
 import { Problem } from "@/components/blueprint/Problem";
 import { WhyFulatelier } from "@/components/blueprint/WhyFulatelier";
+import { WorkShowcase } from "@/components/blueprint/WorkShowcase";
 
 const title = "The Digital Storefront Blueprint™ | Fulatelier LLC";
 const description =
@@ -130,6 +131,7 @@ export default function BlueprintPage() {
       <main id="main-content" tabIndex={-1} className="flex-1 bg-background outline-none">
         <Hero />
         <Problem />
+        <WorkShowcase />
         <BlueprintTimeline />
         <Included />
         <Portfolio />
