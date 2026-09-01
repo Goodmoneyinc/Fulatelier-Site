@@ -123,7 +123,7 @@ export function Footer() {
                     href={link.href}
                     className="block font-inter text-xs uppercase leading-[2.4] tracking-[0.15em] text-subtle transition-colors duration-150 ease-out hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
                   >
-                    {link.label}
+                    {link.href === "/care" ? "Fulatelier Care" : link.label}
                   </a>
                   {index < navLinks.length - 1 ? (
                     <div
