@@ -7,16 +7,12 @@ import { ArrowLink } from "@/components/ui/ArrowLink";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 /**
- * Formspree endpoint for ebook downloads.
- *
- * Gerald: create a dedicated form at formspree.io named
- * "Fulatelier Ebook — Playbook Download", then replace YOUR_FORM_ID
- * below with the real endpoint (https://formspree.io/f/XXXXXXXX).
- * Every submission emails fulatelier@gmail.com with the visitor's
- * name and email; reply manually with the download link until
+ * Formspree endpoint for ebook downloads ("Fulatelier Ebook — Playbook
+ * Download"). Every submission emails fulatelier@gmail.com with the
+ * visitor's name and email; reply manually with the download link until
  * volume justifies a paid Formspree autoresponder.
  */
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjyvwror";
 
 const CHAPTERS = [
   "The Digital Shift",
