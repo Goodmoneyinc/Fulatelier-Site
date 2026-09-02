@@ -201,11 +201,24 @@ function SuccessPanel() {
       </svg>
 
       <h2 className="mt-4 font-cormorant text-[28px] font-bold text-text">
-        It&apos;s on its way.
+        Your copy is ready.
       </h2>
       <p className="mt-2 font-inter text-sm leading-[1.7] text-subtle">
-        Check your inbox — your copy of From Side Hustle to Digital Business
-        is heading there now.
+        From Side Hustle to Digital Business — 10 chapters on building a
+        real digital business with AI, software, and the internet.
+      </p>
+
+      <a
+        href="https://drive.google.com/file/d/1o-VQ6X36-4Uq6lmULrynxKdbO5vOo3Iz/view?usp=drive_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mx-auto mt-5 block w-fit bg-accent px-7 py-3.5 font-inter text-xs font-semibold text-background transition-colors duration-150 ease-out hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
+      >
+        Download Free Ebook →
+      </a>
+
+      <p className="mt-3 font-inter text-[11px] text-subtle">
+        A copy is also on its way to your inbox.
       </p>
 
       <div className="my-5 h-px w-full bg-accent/40" aria-hidden="true" />
