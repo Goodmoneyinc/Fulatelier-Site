@@ -117,7 +117,7 @@ export function Footer() {
               NAVIGATE
             </p>
             <ul className="flex flex-col">
-              {navLinks.map((link, index) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
@@ -125,14 +125,20 @@ export function Footer() {
                   >
                     {link.href === "/care" ? "Fulatelier Care" : link.label}
                   </a>
-                  {index < navLinks.length - 1 ? (
-                    <div
-                      className="h-px w-full bg-accent/30"
-                      aria-hidden="true"
-                    />
-                  ) : null}
+                  <div
+                    className="h-px w-full bg-accent/30"
+                    aria-hidden="true"
+                  />
                 </li>
               ))}
+              <li>
+                <a
+                  href="/playbook"
+                  className="block font-inter text-xs uppercase leading-[2.4] tracking-[0.15em] text-subtle transition-colors duration-150 ease-out hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-light focus-visible:ring-offset-2 focus-visible:ring-offset-footer"
+                >
+                  Free Ebook
+                </a>
+              </li>
             </ul>
           </nav>
 
