@@ -17,9 +17,9 @@ const PROJECTS = [
       "Limited edition Swiss watch drop. Edition of 88. $48,000 per piece.",
   },
   {
-    href: "https://gym-three-tan.vercel.app/",
+    href: "https://gym-project.vercel.app/",
     screenshot: "/work/twogs.png",
-    displayUrl: "gym-three-tan.vercel.app",
+    displayUrl: "gym-project.vercel.app",
     badge: "STREETWEAR · E-COMMERCE",
     name: "Two G's Supply",
     description:
@@ -35,18 +35,18 @@ const PROJECTS = [
       "Precision barbershop in Jackson, MS. Booking and full service menu.",
   },
   {
-    href: "https://apex-roofing-phi-navy.vercel.app/",
+    href: "https://apex-roofing.vercel.app/",
     screenshot: "/work/apex.png",
-    displayUrl: "apex-roofing-phi-navy.vercel.app",
+    displayUrl: "apex-roofing.vercel.app",
     badge: "CONTRACTOR · FULL BUILD",
     name: "Apex Roofing",
     description:
       "Jackson MS roofing company. Before/after slider, lead form, insurance claims workflow.",
   },
   {
-    href: "https://www.loadhunters.com/",
+    href: "https://loadhunters.vercel.app/",
     screenshot: "/work/loadhunters.png",
-    displayUrl: "loadhunters.com",
+    displayUrl: "loadhunters.vercel.app",
     badge: "SAAS PLATFORM · LIVE PRODUCT",
     name: "LoadHunters",
     description:
