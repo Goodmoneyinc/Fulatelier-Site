@@ -53,19 +53,11 @@ const PROJECTS = [
       "Freight dispatcher detention billing platform. Live SaaS product in active pilot.",
     emphasized: true,
   },
-  {
-    href: "https://the-villie.vercel.app/",
-    screenshot: "/work/villie.png",
-    displayUrl: "the-villie.vercel.app",
-    badge: "NON-PROFIT · 501(C)(3)",
-    name: "The Villie",
-    description: "501(c)(3) non-profit community brand.",
-  },
 ] as const;
 
 /**
- * Blueprint work showcase — six real, live projects Gerald has built.
- * Rows: 3 + 3 on desktop, single column on mobile. LoadHunters (the one
+ * Blueprint work showcase — five real, live projects Gerald has built.
+ * Rows: 3 + 2 on desktop, single column on mobile. LoadHunters (the one
  * live SaaS product, not a concept build) gets the brighter gold treatment.
  */
 export function WorkShowcase() {
@@ -127,7 +119,7 @@ export function WorkShowcase() {
               ease: EASE,
             }}
           >
-            Six live projects. Every one built from scratch. No templates.
+            Five live projects. Every one built from scratch. No templates.
           </motion.p>
         </div>
 
